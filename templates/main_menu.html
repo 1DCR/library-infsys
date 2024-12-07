@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главное меню</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main_menu.css') }}">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const flashMessages = document.querySelector('.flash-messages');
+            if (flashMessages) {
+                setTimeout(() => {
+                    flashMessages.style.transition = 'opacity 0.5s ease-out';
+                    flashMessages.style.opacity = '0';
+                    setTimeout(() => flashMessages.remove(), 500);
+                }, 2000);
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="header">
+        <h2>Библиотека. Главное меню внутренних пользователей.</h2>
+        <div class="right-buttons">
+            {% if not is_authorized %}
+                <a href="{{ url_for('auth_bp.auth_index') }}">Авторизация</a>
+            {% else %}
+                <a href="{{ url_for('logout_func') }}">Выход</a>
+            {% endif %}
+        </div>
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for message in messages %}
+        <div class="flash-message">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <div class="menu-container">
+        <p>
+            <div class="dropdown">
+                <span class="main-btn">Работа с запросами</span>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('query_bp.query_input_form') }}">Посмотреть издательства, заключившие контракт за период</a>
+                    <a href="">Запрос типа 2</a>
+                    <a href="">Запрос типа 3</a>
+                </div>
+            </div>
+        </p>
+    </div>
+
+    <div class="footer">
+        <h5 class="message">{{ message }}</h5>
+    </div>
+</body>
+</html>

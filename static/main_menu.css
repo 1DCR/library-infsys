@@ -1,0 +1,167 @@
+/* Основной стиль страницы */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: space-between;
+}
+
+/* Шапка */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.header h2 {
+    margin: 0;
+    color: #333;
+}
+
+.right-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.right-buttons a {
+    text-decoration: none;
+    font-size: 16px;
+    color: #007BFF;
+    padding: 10px 15px;
+    border: 1px solid #007BFF;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.right-buttons a:hover {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+/* Меню-контейнер */
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    margin-top: 60px;
+}
+
+.main-btn {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 24px;
+    color: #007BFF;
+    padding: 15px 40px;
+    border: 2px solid #007BFF;
+    border-radius: 8px;
+    margin: 10px;
+    cursor: default; /* Делает кнопку некликабельной */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.main-btn:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+/* Выпадающее меню */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%; /* Смещает меню ровно под кнопку */
+    left: 50%;
+    transform: translateX(-50%); /* Центрирует меню относительно кнопки */
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 100%; /* Меню такой же ширины, как кнопка */
+    border: 1px solid #ddd;
+    z-index: 1;
+    border-radius: 8px; /* Совпадает с кнопкой */
+    overflow: hidden; /* Убирает лишние границы */
+}
+
+.dropdown-content a {
+    text-decoration: none;
+    font-size: 18px;
+    color: #007BFF;
+    padding: 10px 15px;
+    display: block;
+    text-align: center; /* Центрирует текст в пунктах меню */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dropdown-content a:hover {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .main-btn {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+/* Футер */
+.footer {
+    padding: 10px 20px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    width: 100%;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.message {
+    color: #555;
+    font-size: 16px;
+    margin: 0;
+}
+
+.flash-messages {
+    position: fixed;
+    top: 70px; /* Расположено под заголовком */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    max-width: 90%;
+    background-color: #ffefc2; /* Светло-желтый фон для сообщения */
+    border: 1px solid #ffcc00;
+    border-radius: 8px;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    text-align: center;
+    color: #333;
+    opacity: 1; /* Начальное значение */
+    transition: opacity 0.5s ease-out; /* Плавный переход */
+}
+
+.flash-message {
+    margin-bottom: 5px;
+}
+
+.flash-message:last-child {
+    margin-bottom: 0;
+}

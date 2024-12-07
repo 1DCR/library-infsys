@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <title>dynamic</title>
+    <link href="{{url_for('static', filename='sem1.css')}}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<center>
+    <h2>{{prod_title}}</h2>
+    <table border="1">
+        <tr class="tab_title">
+            <td>Название</td>
+            <td>Ед. измерения</td>
+            <td>Цена</td>
+        </tr>
+        {% for product in products %}
+        <tr>
+            <td>{{product['prod_name']}}</td>
+            <td>{{product['prod_measure']}}</td>
+            <td>{{product['prod_price']}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</center>
+</body>
+</html>
