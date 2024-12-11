@@ -9,6 +9,7 @@ class AuthResponse:
     error_message: str
     status: bool
 
+
 def check_user(db_config, provider, login_data):
     error_message = ''
     if not(bool(match(r'^[a-zA-Z\d!#$%&?]{4,}$', login_data['password']))):
