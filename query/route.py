@@ -16,10 +16,23 @@ class QueryResponse:
     status: bool
 
 
-@blueprint_query.route('/', methods=['GET'])
+@blueprint_query.route('/publish-house-contract', methods=['GET'])
 @group_required
-def query_input_form():
-    return render_template('publish_house_contract_input.html')
+def publish_house_contract():
+    return render_template('publish_house_contract.html')
+
+
+@blueprint_query.route('/query-2', methods=['GET'])
+@group_required
+def query_2():
+    return render_template('query_2_input.html')
+
+
+@blueprint_query.route('/query-3', methods=['GET'])
+@group_required
+def query_3():
+    return render_template('query_3_input.html')
+
 
 @blueprint_query.route('/')
 #@group_required

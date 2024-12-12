@@ -24,4 +24,4 @@ def auth_index():
         return redirect('/')
     else:
         flash(auth_result.error_message, 'danger')
-        return redirect(url_for('auth_bp.login_form'))
+        return redirect('/auth')
