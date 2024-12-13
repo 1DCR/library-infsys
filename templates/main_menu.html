@@ -40,17 +40,18 @@
     {% endwith %}
 
     <div class="menu-container">
-        <p>
-            <div class="dropdown">
-                <span class="main-btn">Работа с запросами</span>
-                <div class="dropdown-content">
-                    <a href="{{ url_for('query_bp.publish_house_contract') }}">Посмотреть издательства, заключившие контракт за период</a>
-                    <a href="">Запрос типа 2</a>
-                    <a href="">Запрос типа 3</a>
-                </div>
+    <p>
+        <div class="dropdown">
+            <span class="main-btn">Работа с запросами</span>
+            <div class="dropdown-content">
+                <a href="{{ url_for('query_bp.query_handle') }}?action=publish_house_contract">Посмотреть издательства, заключившие контракт за период</a>
+                <a href="{{ url_for('query_bp.query_handle') }}?action=publish_house_city">Посмотреть все издательства в городе N</a>
+                <a href="{{ url_for('query_bp.query_handle') }}?action=publish_house_batch">Показать все поставки издательства X</a>
             </div>
-        </p>
+        </div>
+    </p>
     </div>
+
 
     <div class="footer">
         <h5 class="message">{{ message }}</h5>

@@ -11,7 +11,7 @@ def select_list(db_config : dict, _sql):
             schema = []
             for item in cursor.description:
                 schema.append(item[0])
-            print(schema)
+            #print(schema)
             return result, schema
 
 def select_dict(db_config : dict, _sql):
@@ -19,7 +19,7 @@ def select_dict(db_config : dict, _sql):
     result_dict = []
     for item in result:
         result_dict.append(dict(zip(schema, item)))
-    print(result_dict)
+    #print(result_dict)
     return result_dict
 
 def call_proc(db_config: dict, procedure_name, *args):

@@ -1,7 +1,7 @@
 import os
 from flask import render_template, Blueprint, current_app, request, redirect, url_for, flash
-from database.sql_provider import SQLProvider
 
+from database.sql_provider import SQLProvider
 from auth.model import check_user
 
 blueprint_auth = Blueprint('auth_bp', __name__, template_folder='templates')
@@ -16,7 +16,7 @@ def login_form():
 
 @blueprint_auth.route('/', methods=['POST'])
 def auth_index():
-    login_data = request.form
+    login_data = request.form.to_dict()
     auth_result = check_user(current_app.config['db_config'], provider, login_data)
 
     if auth_result.status:

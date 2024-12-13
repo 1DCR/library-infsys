@@ -6,22 +6,26 @@
     <link href="{{url_for('static', filename='sem1.css')}}" rel="stylesheet" type="text/css">
 </head>
 <body>
-<center>
-    <h2>{{prod_title}}</h2>
-    <table border="1">
-        <tr class="tab_title">
-            <td>Название</td>
-            <td>Ед. измерения</td>
-            <td>Цена</td>
-        </tr>
-        {% for product in products %}
-        <tr>
-            <td>{{product['prod_name']}}</td>
-            <td>{{product['prod_measure']}}</td>
-            <td>{{product['prod_price']}}</td>
-        </tr>
-        {% endfor %}
-    </table>
-</center>
+    <h1>{{ query_name }}</h1>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    {% for column in columns %}
+                        <th>{{ column }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                    <tr>
+                        {% for cell in row %}
+                            <td>{{ cell }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
