@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Издательства за период</title>
     <link href="{{url_for('static', filename='query1.css')}}" rel="stylesheet" type="text/css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const flashMessages = document.querySelector('.flash-messages');
+            if (flashMessages) {
+                setTimeout(() => {
+                    flashMessages.style.transition = 'opacity 0.5s ease-out';
+                    flashMessages.style.opacity = '0';
+                    setTimeout(() => flashMessages.remove(), 500);
+                }, 2000);
+            }
+        });
+    </script>
 </head>
 <body>
     <!-- Кнопка "Главное меню" -->
@@ -12,17 +24,22 @@
         <a href="{{ url_for('main_menu') }}" class="btn-back">Главное меню</a>
     </div>
 
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for message in messages %}
+        <div class="flash-message">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
     <div class="container">
-        <h2>ВСЕ ПОСТАВКИ ИЗДАТЕЛЬСТВА X</h2>
+        <h2>ВСЕ ПОСТАВКИ ИЗДАТЕЛЬСТВА</h2>
         <form action="" method="POST">
             <div class="input-group">
-                <label for="start_date">Начальная дата:</label>
-                <input type="date" id="start_date" name="start_date" required>
-            </div>
-
-            <div class="input-group">
-                <label for="end_date">Конечная дата:</label>
-                <input type="date" id="end_date" name="end_date" required>
+                <label for="publish_house">Название издательства:</label>
+                <input type="text" id="publish_house" name="publish_house" required>
             </div>
 
             <button type="submit" class="btn">Отправить</button>

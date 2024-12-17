@@ -86,3 +86,69 @@ input[type="date"] {
 .btn:hover {
     background-color: #0056b3;
 }
+
+/* Стили для выпадающего списка */
+select {
+    width: 100%;          /* Ширина по умолчанию на 100% от родительского элемента */
+    max-width: 400px;     /* Максимальная ширина для обеспечения нормального отображения */
+    height: 40px;         /* Фиксированная высота выпадающего списка */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #fff;
+    color: #333;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    text-overflow: ellipsis; /* Если слишком длинное значение, оно будет обрезаться */
+    overflow: hidden;
+}
+
+/* Стили при наведении и фокусе на выпадающий список */
+select:hover,
+select:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    outline: none;
+}
+
+option {
+    padding: 10px;
+    background-color: #fff;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+
+.flash-messages {
+    position: fixed;
+    top: 70px; /* Расположено под заголовком */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    max-width: 90%;
+    background-color: #ffefc2; /* Светло-желтый фон для сообщения */
+    border: 1px solid #ffcc00;
+    border-radius: 8px;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    text-align: center;
+    color: #333;
+    opacity: 1; /* Начальное значение */
+    transition: opacity 0.5s ease-out; /* Плавный переход */
+}
+
+.flash-message {
+    margin-bottom: 5px;
+}
+
+.flash-message:last-child {
+    margin-bottom: 0;
+}

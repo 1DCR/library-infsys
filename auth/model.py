@@ -18,13 +18,13 @@ def check_user(db_config, provider, login_data):
         return AuthResponse(error_message=error_message, status=False)
 
     _sql = provider.get('internal_user.sql', login_data)
-    user_data = select_dict(db_config, _sql)[0]
+    user_data = select_dict(db_config, _sql)
 
     if not user_data:
         error_message = 'Неверный логин или пароль'
         return AuthResponse(error_message=error_message, status=False)
 
-    session['user_id'] = user_data['user_id']
-    session['user_group'] = user_data['user_group']
+    session['user_id'] = user_data[0]['user_id']
+    session['user_group'] = user_data[0]['user_group']
 
     return AuthResponse(error_message='', status=True)

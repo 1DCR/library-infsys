@@ -3,8 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Издательства за период</title>
+    <title>Издательства в городе</title>
     <link href="{{url_for('static', filename='query1.css')}}" rel="stylesheet" type="text/css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const flashMessages = document.querySelector('.flash-messages');
+            if (flashMessages) {
+                setTimeout(() => {
+                    flashMessages.style.transition = 'opacity 0.5s ease-out';
+                    flashMessages.style.opacity = '0';
+                    setTimeout(() => flashMessages.remove(), 500);
+                }, 2000);
+            }
+        });
+    </script>
 </head>
 <body>
     <!-- Кнопка "Главное меню" -->
@@ -12,17 +24,44 @@
         <a href="{{ url_for('main_menu') }}" class="btn-back">Главное меню</a>
     </div>
 
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for message in messages %}
+        <div class="flash-message">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
     <div class="container">
-        <h2>ВСЕ ИЗДАТЕЛЬСТВА В ГОРОДЕ N</h2>
+        <h2>ВСЕ ИЗДАТЕЛЬСТВА В ГОРОДЕ</h2>
         <form action="" method="POST">
             <div class="input-group">
-                <label for="start_date">Начальная дата:</label>
-                <input type="date" id="start_date" name="start_date" required>
-            </div>
-
-            <div class="input-group">
-                <label for="end_date">Конечная дата:</label>
-                <input type="date" id="end_date" name="end_date" required>
+                <label for="city">Выберите город:</label>
+                <select id="city" name="city" required>
+                    <option value="">Выберите город</option>
+                    <option value="Москва">Москва</option>
+                    <option value="Санкт-Петербург">Санкт-Петербург</option>
+                    <option value="Новосибирск">Новосибирск</option>
+                    <option value="Екатеринбург">Екатеринбург</option>
+                    <option value="Нижний Новгород">Нижний Новгород</option>
+                    <option value="Казань">Казань</option>
+                    <option value="Челябинск">Челябинск</option>
+                    <option value="Омск">Омск</option>
+                    <option value="Самара">Самара</option>
+                    <option value="Саранск">Саранск</option>
+                    <option value="Ростов-на-Дону">Ростов-на-Дону</option>
+                    <option value="Уфа">Уфа</option>
+                    <option value="Красноярск">Красноярск</option>
+                    <option value="Воронеж">Воронеж</option>
+                    <option value="Пермь">Пермь</option>
+                    <option value="Тюмень">Тюмень</option>
+                    <option value="Ижевск">Ижевск</option>
+                    <option value="Барнаул">Барнаул</option>
+                    <option value="Ульяновск">Ульяновск</option>
+                    <!-- Добавьте другие города по необходимости -->
+                </select>
             </div>
 
             <button type="submit" class="btn">Отправить</button>

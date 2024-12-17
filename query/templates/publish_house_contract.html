@@ -5,12 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Издательства за период</title>
     <link href="{{url_for('static', filename='query1.css')}}" rel="stylesheet" type="text/css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const flashMessages = document.querySelector('.flash-messages');
+            if (flashMessages) {
+                setTimeout(() => {
+                    flashMessages.style.transition = 'opacity 0.5s ease-out';
+                    flashMessages.style.opacity = '0';
+                    setTimeout(() => flashMessages.remove(), 500);
+                }, 2000);
+            }
+        });
+    </script>
 </head>
 <body>
     <!-- Кнопка "Главное меню" -->
     <div class="main-menu-button">
         <a href="{{ url_for('main_menu') }}" class="btn-back">Главное меню</a>
     </div>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for message in messages %}
+        <div class="flash-message">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
 
     <div class="container">
         <h2>ИЗДАТЕЛЬСТВА, ЗАКЛЮЧИВШИЕ КОНТРАКТ ЗА ПЕРИОД</h2>
