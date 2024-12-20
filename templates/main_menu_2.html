@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главное меню</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main_menu_2.css') }}">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const flashMessages = document.querySelector('.flash-messages');
+            if (flashMessages) {
+                setTimeout(() => {
+                    flashMessages.style.transition = 'opacity 0.5s ease-out';
+                    flashMessages.style.opacity = '0';
+                    setTimeout(() => flashMessages.remove(), 500);
+                }, 2000);
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="page-header">
+        <div class="header-title">Библиотека</div>
+        <button class="btn-auth">
+            {% if not is_authorized %}
+                <a href="{{ url_for('auth_bp.auth_index') }}" class="auth-link">Авторизация</a>
+            {% else %}
+                <a href="{{ url_for('logout_func') }}" class="auth-link">Выход</a>
+            {% endif %}
+        </button>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-title">
+            Главное меню внутренних пользователей.
+        </div>
+        <hr class="sidebar-divider">
+        <ul class="list-unstyled">
+            <li>
+                <button class="btn btn-toggle" data-bs-toggle="collapse" data-bs-target="#requests-collapse">Работа с запросами</button>
+                <div class="collapse" id="requests-collapse">
+                    <ul class="btn-toggle-nav">
+                        {% for query_key, query_info in queries.items() %}
+                        <li>
+                            <a href="{{ url_for('query_bp.query_handle') }}?action={{ query_key }}">{{ query_info.menu_text }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <button class="btn btn-toggle" data-bs-toggle="collapse" data-bs-target="#reports-collapse">Работа с отчетами</button>
+                <div class="collapse" id="reports-collapse">
+                    <ul class="btn-toggle-nav">
+                        <li><a href="{{ url_for('report_bp.report_handle') }}?action=report_type_1">Отчет 1</a></li>
+                        <li><a href="{{ url_for('report_bp.report_handle') }}?action=report_type_2">Отчет 2</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1>Добро пожаловать в библиотеку!</h1>
+        <p>Здесь вы можете:</p>
+        <ul>
+            <li>Работать с запросами.</li>
+            <li>Создавать и просматривать отчеты.</li>
+            <li>Авторизоваться или выйти из системы.</li>
+        </ul>
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for message in messages %}
+        <div class="flash-message">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

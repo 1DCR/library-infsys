@@ -1,0 +1,139 @@
+/* Общий стиль */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+}
+
+/* Хедер */
+.page-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #003366;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 1000;
+}
+
+.header-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.btn-auth {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-auth .auth-link {
+    color: white;
+    text-decoration: none;
+}
+
+.btn-auth:hover {
+    background-color: #0056b3;
+}
+
+/* Боковая панель */
+.sidebar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 250px;
+    height: calc(100vh - 60px);
+    background-color: #ffffff;
+    padding: 20px;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-title {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #003366;
+}
+
+/* Основной контент */
+.main-content {
+    margin-left: 250px;
+    margin-top: 60px;
+    padding: 20px;
+    background-color: #f0f4f8;
+    flex-grow: 1;
+}
+
+/* Кнопки аккордеонов */
+.btn-toggle {
+    width: 100%;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    text-align: left;
+    cursor: pointer;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.btn-toggle:hover {
+    background-color: #0056b3;
+}
+
+.btn-toggle-nav a {
+    color: #495057;
+    text-decoration: none;
+    display: block;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.btn-toggle-nav a:hover {
+    background-color: #007BFF;
+    color: white;
+}
+.sidebar-divider {
+    border: 0;
+    height: 2px;
+    background-color: #003366; /* Цвет разделителя */
+    margin: 10px 0;
+}
+
+.flash-messages {
+    position: fixed;
+    bottom: 30px; /* Отступ от нижнего края */
+    right: 30px; /* Отступ от правого края */
+    z-index: 1000;
+    max-width: 300px; /* Ширина сообщения (можно настроить) */
+    background-color: #ffefc2; /* Светло-желтый фон для сообщения */
+    border: 1px solid #ffcc00;
+    border-radius: 8px;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    text-align: left; /* Выравнивание текста по левому краю */
+    color: #333;
+    opacity: 1; /* Начальное значение */
+    transition: opacity 0.5s ease-out; /* Плавный переход */
+}
+
+.flash-message {
+    margin-bottom: 10px; /* Отступ между сообщениями */
+}
+
+.flash-message:last-child {
+    margin-bottom: 0;
+}
+

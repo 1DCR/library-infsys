@@ -2,21 +2,21 @@
   "publish_house_contract" : {
     "sql_name" : "publish_house_contract.sql",
     "params" : [
-      {"name": "start_date", "type": "date", "label": "Начальная дата"},
-      {"name": "end_date", "type": "date", "label": "Конечная дата"}
+      {"name": "start_date", "type": "date", "label": "Начальная дата:"},
+      {"name": "end_date", "type": "date", "label": "Конечная дата:"}
     ],
     "menu_text": "Показать издательства, заключившие контракт за период",
-    "input_text" : "Издательства, заключившие контракт за период:",
+    "input_text" : "Издательства, заключившие контракт за период",
     "result_text" : "Издательства, заключившие контракт с $start_date по $end_date"
   },
 
   "publish_house_city" : {
     "sql_name" : "publish_house_city.sql",
     "params" : [
-      {"name": "city", "type": "text", "label": "Город"}
+      {"name": "city", "type": "text", "label": "Город (с большой буквы):"}
     ],
     "menu_text": "Показать все издательства в городе N",
-    "input_text" : "Издательства, находящиеся в городе:",
+    "input_text" : "Издательства, находящиеся в городе",
     "result_text" : "Все издательства в городе $city"
 
   },
@@ -24,11 +24,11 @@
   "publish_house_batch" : {
     "sql_name" : "publish_house_batch.sql",
     "params" : [
-      {"name": "publish_house_name", "type": "text", "label": "Название издательства"}
+      {"name": "publish_house_name", "type": "text", "label": "Название издательства:"}
     ],
     "menu_text": "Показать все поставки издательства X",
-    "input_text" : "Все поставки издательства:",
-    "result_text" : "Все поставки издательства $publish_house"
+    "input_text" : "Все поставки издательства",
+    "result_text" : "Все поставки издательства $publish_house_name"
 
   }
 }

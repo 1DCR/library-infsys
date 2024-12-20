@@ -23,6 +23,8 @@ with open('data/db_access.json') as f:
 with open('data/query_config.json', encoding='utf-8') as f:
     app.config['query_config'] = json.load(f)
 
+with open('data/report_config.json', encoding='utf-8') as f:
+    app.config['report_config'] = json.load(f)
 
 @app.route('/')
 def main_menu():
@@ -33,7 +35,7 @@ def main_menu():
         message = f'Вы авторизованы как {user_role}.'
     else:
         message = 'Вам необходимо авторизоваться.'
-    return render_template('main_menu.html', message=message, is_authorized=is_authorized, queries=app.config['query_config'])
+    return render_template('main_menu_2.html', message=message, is_authorized=is_authorized, queries=app.config['query_config'])
 
 @app.route('/logout')
 @login_required
