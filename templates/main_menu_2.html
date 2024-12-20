@@ -24,11 +24,11 @@
     <!-- Header -->
     <header class="page-header">
         <div class="header-title">Библиотека</div>
-        <button class="btn-auth">
+        <button class="btn btn-auth">
             {% if not is_authorized %}
-                <a href="{{ url_for('auth_bp.auth_index') }}" class="auth-link">Авторизация</a>
+                <a href="{{ url_for('auth_bp.auth_index') }}">Авторизация</a>
             {% else %}
-                <a href="{{ url_for('logout_func') }}" class="auth-link">Выход</a>
+                <a href="{{ url_for('logout_func') }}">Выход</a>
             {% endif %}
         </button>
     </header>

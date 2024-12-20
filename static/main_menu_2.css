@@ -26,23 +26,36 @@ body {
     font-weight: bold;
 }
 
+/* Кнопка авторизации/выхода */
 .btn-auth {
-    background-color: #007BFF;
-    color: white;
+    display: inline-flex; /* Для выравнивания текста */
+    align-items: center; /* Центрирование по вертикали */
+    justify-content: center; /* Центрирование по горизонтали */
+    background-color: #007BFF; /* Синий фон */
+    color: white !important; /* Белый текст */
+    padding: 10px 20px; /* Внутренние отступы */
     border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
+    border-radius: 5px;
     font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s;
+    width: auto; /* Кнопка по ширине контента */
 }
 
-.btn-auth .auth-link {
-    color: white;
-    text-decoration: none;
+/* Стиль для ссылки внутри кнопки */
+.btn-auth a {
+    text-decoration: none; /* Убираем подчеркивание */
+    color: white; /* Цвет текста */
+    width: 100%; /* Ссылка занимает всю область кнопки */
+    height: 100%; /* Ссылка занимает всю высоту кнопки */
+    display: flex; /* Для центрирования текста */
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-auth:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Темно-синий при наведении */
 }
 
 /* Боковая панель */
@@ -86,6 +99,7 @@ body {
     cursor: pointer;
     font-weight: 600;
     margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .btn-toggle:hover {

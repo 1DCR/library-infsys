@@ -23,8 +23,9 @@ def query_handle():
 @blueprint_query.route('/', methods=['POST'])
 @group_required
 def query_index():
+    action = request.args.get('action')
     user_input_data = request.form.to_dict()
-    query_result = query_execute(current_app.config['db_config'], provider, user_input_data)
+    query_result = query_execute(current_app.config['db_config'], provider, action, user_input_data)
 
     if not query_result.status:
         flash(query_result.message, 'danger')

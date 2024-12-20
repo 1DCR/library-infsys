@@ -13,9 +13,8 @@ class QueryResponse:
     status: bool
 
 
-def query_execute(db_config, sql_provider, user_input_data):
+def query_execute(db_config, sql_provider, action, user_input_data):
     message = ''
-    action = request.args.get('action')
     query_info = current_app.config['query_config'][action]
     sql_name = query_info['sql_name']
     _sql = sql_provider.get(sql_name, user_input_data)
