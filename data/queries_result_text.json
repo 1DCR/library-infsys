@@ -1,3 +1,0 @@
-{"publish_house_contract" :  "Издательства, заключившие контракт с $start_date по $end_date",
-  "publish_house_city" :  "Все издательства в городе $city",
-  "publish_house_batch" : "Все поставки издательства $publish_house"}

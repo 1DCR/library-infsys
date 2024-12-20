@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Издательства за период</title>
+    <link href="{{url_for('static', filename='report.css')}}" rel="stylesheet" type="text/css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const flashMessages = document.querySelector('.flash-messages');
+            if (flashMessages) {
+                setTimeout(() => {
+                    flashMessages.style.transition = 'opacity 0.5s ease-out';
+                    flashMessages.style.opacity = '0';
+                    setTimeout(() => flashMessages.remove(), 500);
+                }, 2000);
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- Кнопка "Главное меню" -->
+    <div class="main-menu-button">
+        <a href="{{ url_for('main_menu') }}" class="btn-back">Главное меню</a>
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for message in messages %}
+        <div class="flash-message">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <div class="container">
+        <h2>ОТЧЕТ ТИПА 1</h2>
+        <form action="" method="POST">
+            <div class="input-group">
+                <label for="year">Год:</label>
+                <select id="year" name="year" required>
+                    {% for year in range(2020, 2026) %}
+                    <option value="{{ year }}">{{ year }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="month">Месяц:</label>
+                <select id="month" name="month" required>
+                    <option value="01">Январь</option>
+                    <option value="02">Февраль</option>
+                    <option value="03">Март</option>
+                    <option value="04">Апрель</option>
+                    <option value="05">Май</option>
+                    <option value="06">Июнь</option>
+                    <option value="07">Июль</option>
+                    <option value="08">Август</option>
+                    <option value="09">Сентябрь</option>
+                    <option value="10">Октябрь</option>
+                    <option value="11">Ноябрь</option>
+                    <option value="12">Декабрь</option>
+                </select>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" formaction="{{ url_for('report_bp.report_create_index') }}" class="btn btn-left">Создать</button>
+                <button type="submit" formaction="{{ url_for('report_bp.report_view_index') }}" class="btn btn-right">Просмотреть</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

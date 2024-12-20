@@ -1,5 +1,7 @@
-from database.DBcm import DBContextManager
 from pymysql import OperationalError
+
+from database.DBcm import DBContextManager
+
 
 def select_list(db_config : dict, _sql):
     with DBContextManager(db_config) as cursor:
@@ -11,16 +13,16 @@ def select_list(db_config : dict, _sql):
             schema = []
             for item in cursor.description:
                 schema.append(item[0])
-            #print(schema)
             return result, schema
+
 
 def select_dict(db_config : dict, _sql):
     result, schema = select_list(db_config, _sql)
     result_dict = []
     for item in result:
         result_dict.append(dict(zip(schema, item)))
-    #print(result_dict)
     return result_dict
+
 
 def call_proc(db_config: dict, procedure_name, *args):
     result = ()

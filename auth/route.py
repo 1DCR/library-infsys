@@ -1,5 +1,5 @@
 import os
-from flask import render_template, Blueprint, current_app, request, redirect, url_for, flash
+from flask import render_template, Blueprint, current_app, request, redirect, flash
 
 from database.sql_provider import SQLProvider
 from auth.model import check_user

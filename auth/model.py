@@ -1,7 +1,9 @@
 from flask import session
+from re import match
+
 from dataclasses import dataclass
 from database.select import select_dict
-from re import match
+
 
 
 @dataclass

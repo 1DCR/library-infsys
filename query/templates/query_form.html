@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Издательства за период</title>
-    <link href="{{url_for('static', filename='query1.css')}}" rel="stylesheet" type="text/css">
+    <title>{{ query_name }}</title>
+    <link href="{{ url_for('static', filename='query1.css') }}" rel="stylesheet" type="text/css">
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const flashMessages = document.querySelector('.flash-messages');
@@ -35,19 +35,15 @@
     {% endwith %}
 
     <div class="container">
-        <h2>ИЗДАТЕЛЬСТВА, ЗАКЛЮЧИВШИЕ КОНТРАКТ ЗА ПЕРИОД</h2>
+        <h2>{{ query_info.input_text }}</h2>
         <form action="" method="POST">
+            {% for param in query_info.params %}
             <div class="input-group">
-                <label for="start_date">Начальная дата:</label>
-                <input type="date" id="start_date" name="start_date" required>
+                <label for="{{ param.name }}">{{ param.label }}</label>
+                <input type="{{ param.type }}" id="{{ param.name }}" name="{{ param.name }}" required>
             </div>
-
-            <div class="input-group">
-                <label for="end_date">Конечная дата:</label>
-                <input type="date" id="end_date" name="end_date" required>
-            </div>
-
-            <button type="submit" class="btn">Отправить</button>
+            {% endfor %}
+            <button type="submit" class="btn">Посмотреть</button>
         </form>
     </div>
 </body>

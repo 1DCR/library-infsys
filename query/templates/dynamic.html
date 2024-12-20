@@ -5,6 +5,7 @@
     <title>Результат запроса</title>
     <link href="{{url_for('static', filename='dynamic_query.css')}}" rel="stylesheet" type="text/css">
 </head>
+<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
 <body>
     <!-- Кнопка "Главное меню" -->
     <div class="main-menu-button">
@@ -14,7 +15,7 @@
         <h1>{{ query_info }}</h1>
     </div>
     <div class="table-container">
-        <table>
+        <table class="sortable">
             <thead>
                 <tr>
                     {% for column in columns %}

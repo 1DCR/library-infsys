@@ -22,6 +22,7 @@ body {
     top: 0;
     left: 0;
     right: 0;
+    z-index: 10; /* Убедитесь, что шапка поверх других элементов */
 }
 
 .header h2 {
@@ -52,13 +53,14 @@ body {
 /* Меню-контейнер */
 .menu-container {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-    margin-top: 60px;
+    justify-content: center; /* Центрирование кнопок по горизонтали */
+    align-items: center; /* Центрирование по вертикали */
+    gap: 20px; /* Отступ между кнопками */
+    margin-top: 100px; /* Отступ сверху (учитываем высоту шапки) */
+    flex-grow: 1; /* Разрешаем меню заполнять оставшееся пространство */
 }
 
+/* Кнопки */
 .main-btn {
     display: inline-block;
     text-decoration: none;

@@ -1,5 +1,4 @@
 from functools import wraps
-from os import access
 
 from flask import session, redirect, url_for, request, current_app
 

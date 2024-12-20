@@ -1,0 +1,26 @@
+{
+  "publish_house_contract" : {
+    "procedure_name" : "proc1",
+    "check_if_exists_sql_name" : "check_sql1.sql",
+    "view_sql_name" : "view_sql1.sql",
+    "params" : [
+      {"name": "start_date", "type": "date", "label": "Начальная дата:"},
+      {"name": "end_date", "type": "date", "label": "Конечная дата:"}
+    ],
+    "menu_text": "Отчет по поставкам",
+    "input_text" : "Издательства, заключившие контракт за период:",
+    "result_text" : "Издательства, заключившие контракт с $start_date по $end_date"
+  },
+
+  "publish_house_city" : {
+    "procedure_name" : "proc2",
+    "check_if_exists_sql_name" : "check_sql2.sql",
+    "view_sql_name" : "view_sql2.sql",
+    "params" : [
+      {"name": "city", "type": "text", "label": "Город (с заглавной буквы):"}
+    ],
+    "menu_text": "Отчет по чему-то еще",
+    "input_text" : "Издательства, находящиеся в городе:",
+    "result_text" : "Все издательства в городе $city"
+  }
+}

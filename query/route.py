@@ -1,13 +1,12 @@
 import os
 from flask import render_template, Blueprint, current_app, request, flash, redirect
 
-
 from database.sql_provider import SQLProvider
 from access import group_required
 from query.model import query_execute
 
 
-blueprint_query = Blueprint('query_bp', __name__, template_folder = 'templates')
+blueprint_query = Blueprint('query_bp', __name__, template_folder ='templates')
 
 provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 
@@ -16,20 +15,16 @@ provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 @group_required
 def query_handle():
     action = request.args.get('action')
+    query_info = current_app.config['query_config'][action]
 
-    if action == 'publish_house_contract':
-        return render_template('publish_house_contract.html')
-    elif action == 'publish_house_city':
-        return render_template('publish_house_city.html')
-    elif action == 'publish_house_batch':
-        return render_template('publish_house_batch.html')
+    return render_template('query_form.html', query_name=action, query_info=query_info)
 
 
 @blueprint_query.route('/', methods=['POST'])
-#@group_required
+@group_required
 def query_index():
     user_input_data = request.form.to_dict()
-    query_result = query_execute(current_app.config['db_config'], user_input_data, provider)
+    query_result = query_execute(current_app.config['db_config'], provider, user_input_data)
 
     if not query_result.status:
         flash(query_result.message, 'danger')
