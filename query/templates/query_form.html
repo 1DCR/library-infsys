@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ query_name }}</title>
+    <title>{{ query_info.menu_text }}</title>
     <link href="{{ url_for('static', filename='query1.css') }}" rel="stylesheet" type="text/css">
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -36,7 +36,8 @@
 
     <div class="container">
         <h2>{{ query_info.input_text }}</h2>
-        <form action="" method="POST">
+        <form action="{{ url_for('query_bp.query_view') }}" method="POST">
+            <input type="hidden" name="query_name" value="{{ query_name }}">
             {% for param in query_info.params %}
             <div class="input-group">
                 <label for="{{ param.name }}">{{ param.label }}</label>

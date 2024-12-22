@@ -26,21 +26,21 @@ def is_month_ended(year, month):
     return current_date.year > year or (current_date.year == year and current_date.month > month)
 
 
-def report_create(db_config, user_input_data, sql_provider):
+def report_create(db_config, sql_provider, user_input_data):
     message = ''
 
-    if not is_month_ended(user_input_data['year'], user_input_data['month']):
+    if not is_month_ended(int(user_input_data['year']), int(user_input_data['month'])):
         message = 'Нельзя создавать отчет за еще не закончившийся период'
         return ReportCreateResponse(message=message, status=False)
 
-    action = request.args.get('action')
-    report_info = current_app.config['report_config'][action]
+    report_name = user_input_data['report_name']
+    report_info = current_app.config['report_config'][report_name]
 
     check_if_exists_sql_name = report_info['check_if_exists_sql_name']
     _sql = sql_provider.get(check_if_exists_sql_name, user_input_data)
-    check_result = select_dict(db_config, _sql)
+    check_if_exists_result = select_dict(db_config, _sql)
 
-    if len(check_result):
+    if len(check_if_exists_result):
         message = f'Отчет за {user_input_data["month"]} меcяц {user_input_data["year"]} уже существует'
         return ReportCreateResponse(message=message, status=False)
 
@@ -50,21 +50,26 @@ def report_create(db_config, user_input_data, sql_provider):
         message = 'Ошибка на стороне базы данных. Попробуйте позже'
         return ReportCreateResponse(message=message, status=False)
 
-    message = f'Отчет за {user_input_data["month"]} меcяц {user_input_data["year"]} года успешно создан'
+    message = f'Отчет за {user_input_data["month"]} меcяц {user_input_data["year"]} года успешно создан' #TODO: СДЕЛАТЬ TEMPALATE
     return ReportCreateResponse(message=message, status=True)
 
 
-def report_get(db_config, user_input_data, sql_provider):
+def report_get(db_config, sql_provider, user_input_data):
     message = ''
-    action = request.args.get('action')
-    report_info = current_app.config['report_config'][action]
-    sql_name = report_info['sql_name']
-    _sql = sql_provider.get(sql_name, user_input_data)
-    result, schema = select_list(db_config, _sql)
+    report_name = user_input_data['report_name']
+    report_info = current_app.config['report_config'][report_name]
 
-    if not len(result):
+    check_if_exists_sql_name = report_info['check_if_exists_sql_name']
+    _sql = sql_provider.get(check_if_exists_sql_name, user_input_data)
+    check_if_exists_result = select_dict(db_config, _sql)
+
+    if not len(check_if_exists_result):
         message = f'Отчет за {user_input_data["month"]} меcяц {user_input_data["year"]} года не найден'
-        return ReportGetResponse(result=result, schema=schema, message=message, status=False)
+        return ReportGetResponse(result=(), schema=[], message=message, status=False)
+
+    view_sql_name = report_info['view_sql_name']
+    _sql = sql_provider.get(view_sql_name, user_input_data)
+    result, schema = select_list(db_config, _sql)
 
     report_result_text = report_info['result_text']
     message = Template(report_result_text).substitute(user_input_data)

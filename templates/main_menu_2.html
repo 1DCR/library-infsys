@@ -26,9 +26,9 @@
         <div class="header-title">Библиотека</div>
         <button class="btn btn-auth">
             {% if not is_authorized %}
-                <a href="{{ url_for('auth_bp.auth_index') }}">Авторизация</a>
+            <a href="{{ url_for('auth_bp.auth_index') }}">Войти</a>
             {% else %}
-                <a href="{{ url_for('logout_func') }}">Выход</a>
+            <a href="{{ url_for('logout_func') }}">Выход</a>
             {% endif %}
         </button>
     </header>
@@ -56,8 +56,11 @@
                 <button class="btn btn-toggle" data-bs-toggle="collapse" data-bs-target="#reports-collapse">Работа с отчетами</button>
                 <div class="collapse" id="reports-collapse">
                     <ul class="btn-toggle-nav">
-                        <li><a href="{{ url_for('report_bp.report_handle') }}?action=report_type_1">Отчет 1</a></li>
-                        <li><a href="{{ url_for('report_bp.report_handle') }}?action=report_type_2">Отчет 2</a></li>
+                        {% for report_key, report_info in reports.items() %}
+                        <li>
+                            <a href="{{ url_for('report_bp.report_handle') }}?action={{ report_key }}">{{ report_info.menu_text }}</a>
+                        </li>
+                        {% endfor %}
                     </ul>
                 </div>
             </li>

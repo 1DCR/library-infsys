@@ -1,5 +1,5 @@
 import os
-from flask import render_template, Blueprint, current_app, request, flash, redirect
+from flask import render_template, Blueprint, current_app, request, flash, redirect, url_for
 
 from database.sql_provider import SQLProvider
 from access import group_required
@@ -15,9 +15,8 @@ provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 @group_required
 def report_handle():
     action = request.args.get('action')
-    report_info = current_app.config['report_config'][action]
-
-    return render_template('report_form.html', query_name=action, query_info=report_info)
+    return render_template('report_form.html', report_name=action,
+                           report_info=current_app.config['report_config'][action])
 
 
 @blueprint_report.route('/create', methods=['POST'])
@@ -28,10 +27,10 @@ def report_create_index():
 
     if not report_create_result.status:
         flash(report_create_result.message, 'success')  # TODO: исправить flash-категории
-        redirect(request.url)
+        return redirect(url_for('report_bp.report_handle') + '/?action=' + user_input_data['report_name'])
     else:
         flash(report_create_result.message, 'danger')
-        redirect(request.url)
+        return redirect(url_for('report_bp.report_handle') + '/?action=' + user_input_data['report_name'])
 
 
 @blueprint_report.route('/view', methods=['POST'])
@@ -41,4 +40,6 @@ def report_view_index():
 
     if not report_get_result.status:
         flash(report_get_result.message, 'danger')
-        redirect(request.url)
+        return redirect(url_for('report_bp.report_handle') + '/?action=' + user_input_data['report_name'])
+    return render_template('dynamic_report.html', report_result_message=report_get_result.message,
+                           columns=report_get_result.schema, data=report_get_result.result)

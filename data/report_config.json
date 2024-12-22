@@ -1,26 +1,19 @@
 {
-  "publish_house_contract" : {
-    "procedure_name" : "proc1",
-    "check_if_exists_sql_name" : "check_sql1.sql",
-    "view_sql_name" : "view_sql1.sql",
-    "params" : [
-      {"name": "start_date", "type": "date", "label": "Начальная дата:"},
-      {"name": "end_date", "type": "date", "label": "Конечная дата:"}
-    ],
-    "menu_text": "Отчет по поставкам",
-    "input_text" : "Издательства, заключившие контракт за период:",
-    "result_text" : "Издательства, заключившие контракт с $start_date по $end_date"
+  "book_shipments" : {
+    "procedure_name" : "GenerateBookShipmentsReport",
+    "check_if_exists_sql_name" : "check_if_exists_BookShipmentsReport.sql",
+    "view_sql_name" : "view_BookShipmentsReport.sql",
+    "menu_text": "Отчет о поставках книг",
+    "input_text" : "Отчет о поставках книг за:",
+    "result_text" : "Отчет о поставках книг за $month месяц $year года"
   },
 
-  "publish_house_city" : {
-    "procedure_name" : "proc2",
-    "check_if_exists_sql_name" : "check_sql2.sql",
-    "view_sql_name" : "view_sql2.sql",
-    "params" : [
-      {"name": "city", "type": "text", "label": "Город (с заглавной буквы):"}
-    ],
-    "menu_text": "Отчет по чему-то еще",
-    "input_text" : "Издательства, находящиеся в городе:",
-    "result_text" : "Все издательства в городе $city"
+  "shipments" : {
+    "procedure_name" : "GenerateShipmentsReport",
+    "check_if_exists_sql_name" : "check_if_exists_ShipmentsReport.sql",
+    "view_sql_name" : "view_ShipmentsReport.sql",
+    "menu_text": "Отчет о поставках по издательствам",
+    "input_text" : "Отчет о поставках по издательствам за:",
+    "result_text" : "Отчет о поставках по издательствам за $month месяц $year года"
   }
 }

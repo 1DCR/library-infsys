@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Издательства за период</title>
-    <link href="{{url_for('static', filename='report.css')}}" rel="stylesheet" type="text/css">
+    <title>{{ report_info.menu_text }}</title>
+    <link href="{{ url_for('static', filename='query1.css') }}" rel="stylesheet" type="text/css">
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const flashMessages = document.querySelector('.flash-messages');
@@ -35,12 +35,13 @@
     {% endwith %}
 
     <div class="container">
-        <h2>ОТЧЕТ ТИПА 2</h2>
+        <h2>{{ report_info.input_text }}</h2>
         <form action="" method="POST">
+            <input type="hidden" name="report_name" value="{{ report_name }}">
             <div class="input-group">
                 <label for="year">Год:</label>
                 <select id="year" name="year" required>
-                    {% for year in range(2020, 2026) %}
+                    {% for year in range(2010, 2026) %}
                     <option value="{{ year }}">{{ year }}</option>
                     {% endfor %}
                 </select>

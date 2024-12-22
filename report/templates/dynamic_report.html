@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <title>Результат запроса</title>
+    <link href="{{url_for('static', filename='dynamic_query.css')}}" rel="stylesheet" type="text/css">
+</head>
+<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+<body>
+    <!-- Кнопка "Главное меню" -->
+    <div class="main-menu-button">
+        <a href="{{ url_for('main_menu') }}" class="btn-back">Главное меню</a>
+    </div>
+    <div class="header-container">
+        <h1>{{ report_result_message }}</h1>
+    </div>
+    <div class="table-container">
+        <table class="sortable">
+            <thead>
+                <tr>
+                    {% for column in columns %}
+                        <th>{{ column }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                    <tr>
+                        {% for cell in row %}
+                            <td>{{ cell }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

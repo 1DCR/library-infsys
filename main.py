@@ -35,7 +35,8 @@ def main_menu():
         message = f'Вы авторизованы как {user_role}.'
     else:
         message = 'Вам необходимо авторизоваться.'
-    return render_template('main_menu_2.html', message=message, is_authorized=is_authorized, queries=app.config['query_config'])
+    return render_template('main_menu_2.html', message=message, is_authorized=is_authorized,
+                           queries=app.config['query_config'], reports=app.config['report_config'])
 
 @app.route('/logout')
 @login_required
