@@ -9,6 +9,6 @@ class SQLProvider:
             _sql = open(f'{file_path}/{file}', encoding='utf-8').read()
             self.scripts[file] = Template(_sql)
 
-    def get(self, file, input_data):
+    def get(self, file, input_data=None):
         sql = self.scripts[file].substitute(input_data)
         return sql

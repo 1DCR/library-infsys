@@ -4,15 +4,19 @@ import json
 from auth.route import blueprint_auth
 from query.route import blueprint_query
 from report.route import blueprint_report
+from catalog.route import blueprint_catalog
 from access import login_required
+
 
 app = Flask(__name__)
 
+#app.debug = True
 app.secret_key = 'You will never guess'
 
 app.register_blueprint(blueprint_auth, url_prefix='/auth')
 app.register_blueprint(blueprint_query, url_prefix='/query')
 app.register_blueprint(blueprint_report, url_prefix='/report')
+app.register_blueprint(blueprint_catalog, url_prefix='/catalog')
 
 with open('data/db_config.json') as f:
     app.config['db_config'] = json.load(f)
@@ -26,17 +30,18 @@ with open('data/query_config.json', encoding='utf-8') as f:
 with open('data/report_config.json', encoding='utf-8') as f:
     app.config['report_config'] = json.load(f)
 
+
 @app.route('/')
 def main_menu():
-    is_authorized = False
+    is_authorized = 'user_group' in session or 'user_name' in session
+    user = session.get('user_group') or session.get('user_name')
+
     if 'user_group' in session:
-        is_authorized = True
-        user_role = session.get('user_group')
-        message = f'Вы авторизованы как {user_role}.'
-    else:
-        message = 'Вам необходимо авторизоваться.'
-    return render_template('main_menu_2.html', message=message, is_authorized=is_authorized,
+        return render_template('main_menu_2.html', user=user, is_authorized=is_authorized,
                            queries=app.config['query_config'], reports=app.config['report_config'])
+
+    return redirect('/catalog')
+
 
 @app.route('/logout')
 @login_required
@@ -44,6 +49,7 @@ def logout_func():
     session.clear()
     flash('Вы вышли из системы')
     return redirect('/')
+
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5001)

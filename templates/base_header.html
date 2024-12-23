@@ -1,0 +1,30 @@
+<link href="{{url_for('static', filename='base_header_style.css')}}" rel="stylesheet" type="text/css">
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.location.href.includes("auth")) {
+        document.getElementById("authButton").style.display = "none";
+      }
+    });
+</script>
+
+
+<!-- Header -->
+<header class="page-header">
+    <div class="header-title">Библиотека</div>
+    {% if 'user_id' in session %}
+    <!-- Отображается, если пользователь авторизован -->
+    <div class="dropdown">
+        <button class="btn btn-auth dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ user }}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="userDropdown">
+            <li><a class="dropdown-item" href="{{ url_for('logout_func') }}">Выход</a></li>
+        </ul>
+    </div>
+    {% else %}
+    <!-- Отображается, если пользователь не авторизован -->
+    <button class="btn btn-auth" id="authButton">
+        <a href="{{ url_for('auth_bp.auth_index') }}">Войти</a>
+    </button>
+    {% endif %}
+</header>

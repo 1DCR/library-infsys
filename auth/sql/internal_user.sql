@@ -1,3 +1,3 @@
-SELECT user_id, user_group, login
+SELECT user_id, user_group, login, password_hash
 FROM internal_user
-WHERE login = '$login' AND password = '$password';
+WHERE login = '$login'

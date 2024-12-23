@@ -1,0 +1,25 @@
+.flash-messages {
+    position: fixed;
+    bottom: 30px; /* Отступ от нижнего края */
+    right: 30px; /* Отступ от правого края */
+    z-index: 1000;
+    max-width: 300px; /* Ширина сообщения (можно настроить) */
+    background-color: #ffefc2; /* Светло-желтый фон для сообщения */
+    border: 1px solid #ffcc00;
+    border-radius: 8px;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    text-align: left; /* Выравнивание текста по левому краю */
+    color: #333;
+    opacity: 1; /* Начальное значение */
+    transition: opacity 0.5s ease-out; /* Плавный переход */
+}
+
+.flash-message {
+    margin-bottom: 10px; /* Отступ между сообщениями */
+}
+
+.flash-message:last-child {
+    margin-bottom: 0;
+}

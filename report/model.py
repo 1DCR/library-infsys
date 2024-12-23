@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import request, current_app
+from flask import current_app
 from string import Template
 
 from pymysql import OperationalError
@@ -30,7 +30,7 @@ def report_create(db_config, sql_provider, user_input_data):
     message = ''
 
     if not is_month_ended(int(user_input_data['year']), int(user_input_data['month'])):
-        message = 'Нельзя создавать отчет за еще не закончившийся период'
+        message = 'Нельзя создавать отчеты за еще не закончившийся период'
         return ReportCreateResponse(message=message, status=False)
 
     report_name = user_input_data['report_name']

@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вход</title>
     <link href="{{url_for('static', filename='auth.css')}}" rel="stylesheet" type="text/css">
+    <script src="{{url_for('static', filename='javascripts/toggle.js')}}"></script>
 </head>
 <body>
+    {% include 'base_header.html' %}
     <!-- Кнопка "Главное меню" -->
     <div class="main-menu-button">
         <a href="{{ url_for('main_menu') }}" class="btn-back">Главное меню</a>
@@ -24,6 +26,14 @@
                 <label for="password">Пароль:</label>
                 <input type="password" id="password" name="password" required>
             </div>
+
+            <!-- Переключатель "Читатель/Сотрудник" -->
+            <div class="toggle-container">
+                <div id="reader" class="toggle-option" onclick="selectRole('reader')">Читатель</div>
+                <div id="employee" class="toggle-option active" onclick="selectRole('employee')">Сотрудник</div>
+            </div>
+
+            <input type="hidden" id="role" name="role" value="employee">
 
             <button type="submit" class="btn">Войти</button>
         </form>

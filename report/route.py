@@ -28,9 +28,9 @@ def report_create_index():
     if not report_create_result.status:
         flash(report_create_result.message, 'success')  # TODO: исправить flash-категории
         return redirect(url_for('report_bp.report_handle') + '/?action=' + user_input_data['report_name'])
-    else:
-        flash(report_create_result.message, 'danger')
-        return redirect(url_for('report_bp.report_handle') + '/?action=' + user_input_data['report_name'])
+
+    flash(report_create_result.message, 'danger')
+    return redirect(url_for('report_bp.report_handle') + '/?action=' + user_input_data['report_name'])
 
 
 @blueprint_report.route('/view', methods=['POST'])

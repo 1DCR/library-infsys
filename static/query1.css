@@ -152,3 +152,28 @@ input[type="text"] {
 .flash-message:last-child {
     margin-bottom: 0;
 }
+
+.button-group {
+    display: flex; /* Устанавливаем flexbox */
+    justify-content: space-between; /* Распределяем кнопки по краям контейнера */
+    gap: 10px; /* Добавляем отступ между кнопками */
+    margin-top: 20px; /* Отступ сверху */
+}
+
+.button-group .btn {
+    width: 48%; /* Каждая кнопка занимает примерно половину доступного пространства */
+    padding: 10px 15px;
+    font-size: 14px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+}
+
+.button-group .btn:hover {
+    background-color: #0056b3;
+}
+
