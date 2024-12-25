@@ -6,10 +6,10 @@ def login_required(func):
 
     @wraps(func)
     def wrapper(*args, **kwargs):
-        if 'user_group' in session:
+        if 'user_id' in session:
             return func(*args, **kwargs)
         else:
-            return redirect(url_for('main_menu'))
+            return redirect(url_for('auth_bp.login_form'))
     return wrapper
 
 def group_required(func):

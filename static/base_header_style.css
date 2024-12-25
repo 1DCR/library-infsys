@@ -1,5 +1,5 @@
-/* Хедер */
 .page-header {
+    display: flex;
     position: fixed;
     top: 0;
     left: 0;
@@ -7,7 +7,6 @@
     height: 60px;
     background-color: #003366;
     color: white;
-    display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
@@ -19,34 +18,60 @@
     font-weight: bold;
 }
 
-/* Кнопка авторизации/выхода */
-.btn-auth {
-    display: inline-flex; /* Для выравнивания текста */
-    align-items: center; /* Центрирование по вертикали */
-    justify-content: center; /* Центрирование по горизонтали */
-    background-color: #007BFF; /* Синий фон */
-    color: white !important; /* Белый текст */
-    padding: 10px 20px; /* Внутренние отступы */
-    border: none;
-    border-radius: 5px;
-    font-size: 14px;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s;
-    width: auto; /* Кнопка по ширине контента */
+/* Контейнер для кнопки корзины и авторизации */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px; /* Расстояние между кнопками */
 }
 
-/* Стиль для ссылки внутри кнопки */
-.btn-auth a {
-    text-decoration: none; /* Убираем подчеркивание */
-    color: white; /* Цвет текста */
-    width: 100%; /* Ссылка занимает всю область кнопки */
-    height: 100%; /* Ссылка занимает всю высоту кнопки */
-    display: flex; /* Для центрирования текста */
+/* Кнопка корзины */
+.btn-cart {
+    background-color: #007BFF; /* Синий фон */
+    border: none;
+    /*padding: 10px 20px; */ /* Отступы вокруг иконки */
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.btn-cart a {
+    display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.btn-auth:hover {
+.btn-cart img {
+    width: 29px; /* Размер иконки */
+    height: 29px; /* Размер иконки */
+}
+
+.btn-cart:hover {
     background-color: #0056b3; /* Темно-синий при наведении */
+}
+
+/* Кнопка авторизации */
+.btn-auth {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #007BFF;
+    color: white !important;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-auth a {
+    text-decoration: none;
+    color: white;
+}
+
+.btn-auth:hover {
+    background-color: #0056b3;
 }

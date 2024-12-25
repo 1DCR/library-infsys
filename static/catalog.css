@@ -1,0 +1,92 @@
+body {
+    background-color: #f0f4f8;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.cards-container {
+    flex: 1;
+    max-width: 900px;
+    padding: 0 15px;
+}
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+.btn-add {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    float: right;
+    transition: background-color 0.3s;
+}
+
+.btn-add-to-cart {
+    float: right;
+}
+
+.btn-add:hover {
+    background-color: #0056b3;
+}
+
+.row {
+    justify-content: center;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.search-bar input,
+.search-bar select,
+.search-bar button {
+    flex: 1;
+    min-width: 200px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.search-bar input {
+    flex-grow: 3; /* Поле ввода будет занимать больше места */
+}
+
+.search-bar button {
+    width: 100px; /* Фиксированная ширина кнопки */
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-bar button:hover {
+    background-color: #0056b3;
+}

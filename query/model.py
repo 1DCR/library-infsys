@@ -1,7 +1,7 @@
 from flask import current_app
 from string import Template
 
-from database.select import select_list, select_dict
+from database.select import select_list
 from dataclasses import dataclass
 
 

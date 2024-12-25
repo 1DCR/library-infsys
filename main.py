@@ -33,11 +33,11 @@ with open('data/report_config.json', encoding='utf-8') as f:
 
 @app.route('/')
 def main_menu():
-    is_authorized = 'user_group' in session or 'user_name' in session
+    is_authorized = 'user_id' in session
     user = session.get('user_group') or session.get('user_name')
 
     if 'user_group' in session:
-        return render_template('main_menu_2.html', user=user, is_authorized=is_authorized,
+        return render_template('internal_main_menu.html', user=user, is_authorized=is_authorized,
                            queries=app.config['query_config'], reports=app.config['report_config'])
 
     return redirect('/catalog')

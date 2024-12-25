@@ -20,7 +20,7 @@ def auth_index():
     auth_result = check_user(current_app.config['db_config'], provider, login_data)
 
     if auth_result.status:
-        flash('Вы успешно вошли!', 'success')
+        flash('Вы успешно авторизовались!', 'success')
         return redirect('/')
     else:
         flash(auth_result.error_message, 'danger')

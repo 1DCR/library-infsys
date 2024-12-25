@@ -29,11 +29,11 @@
 
             <!-- Переключатель "Читатель/Сотрудник" -->
             <div class="toggle-container">
-                <div id="reader" class="toggle-option" onclick="selectRole('reader')">Читатель</div>
-                <div id="employee" class="toggle-option active" onclick="selectRole('employee')">Сотрудник</div>
+                <div id="reader" class="toggle-option active" onclick="selectRole('reader')">Читатель</div>
+                <div id="employee" class="toggle-option" onclick="selectRole('employee')">Сотрудник</div>
             </div>
 
-            <input type="hidden" id="role" name="role" value="employee">
+            <input type="hidden" id="role" name="role" value="reader">
 
             <button type="submit" class="btn">Войти</button>
         </form>
