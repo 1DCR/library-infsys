@@ -12,12 +12,20 @@
 
 
 <header class="page-header">
-    <div class="header-title">Библиотека</div>
+    <div class="header-title">
+        <a href="/" class="library-link">Библиотека</a>
+    </div>
     <div class="header-actions">
         <button class="btn btn-cart" id="cartButton" style="display: none;">
-            <a href="/cart">
-                <img src="{{ url_for('static', filename='icons/bookshelf.ico') }}" alt="Корзина">
-            </a>
+            {% if 'user_id' in session %}
+                <a href="/cart">
+                    <img src="{{ url_for('static', filename='icons/bookshelf.ico') }}" alt="Корзина">
+                </a>
+            {% else %}
+                <a href="/auth">
+                    <img src="{{ url_for('static', filename='icons/bookshelf.ico') }}" alt="Корзина">
+                </a>
+            {% endif %}
         </button>
         {% if 'user_id' in session %}
         <div class="dropdown">

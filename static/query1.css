@@ -14,29 +14,6 @@ body {
     height: 100vh;
 }
 
-/* Кнопка "Главное меню" */
-.main-menu-button {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-}
-
-.btn-back {
-    background-color: #007BFF;
-    color: white;
-    padding: 10px 15px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 14px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.btn-back:hover {
-    background-color: #0056b3;
-}
-
 .container {
     background-color: white;
     border-radius: 8px;
@@ -125,33 +102,6 @@ input[type="text"] {
     box-sizing: border-box;
 }
 
-
-.flash-messages {
-    position: fixed;
-    top: 70px; /* Расположено под заголовком */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    max-width: 90%;
-    background-color: #ffefc2; /* Светло-желтый фон для сообщения */
-    border: 1px solid #ffcc00;
-    border-radius: 8px;
-    padding: 10px 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-size: 16px;
-    text-align: center;
-    color: #333;
-    opacity: 1; /* Начальное значение */
-    transition: opacity 0.5s ease-out; /* Плавный переход */
-}
-
-.flash-message {
-    margin-bottom: 5px;
-}
-
-.flash-message:last-child {
-    margin-bottom: 0;
-}
 
 .button-group {
     display: flex; /* Устанавливаем flexbox */

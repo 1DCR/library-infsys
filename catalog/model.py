@@ -37,7 +37,6 @@ def add_to_cart(db_config, sql_provider, data):
                                   X : {                                 .      .      .                                   }
                                  },
                         'TOTAL_PRICE' : XXXXX}"""
-
     message = ''
     catalog_book_id = data.get('catalog_book_id')
 
@@ -60,6 +59,7 @@ def add_to_cart(db_config, sql_provider, data):
                                               'publish_house': catalog_book_info['publish_house_name'],
                                               'price': catalog_book_info['price'],
                                               'amount': 1}
+    current_cart['total_price'] += catalog_book_info['price']
 
     session['cart'] = current_cart
 

@@ -18,6 +18,15 @@
     font-weight: bold;
 }
 
+.library-link {
+    color: white; /* Белый цвет текста */
+    text-decoration: none; /* Убирает подчеркивание */
+}
+
+.library-link:hover {
+    text-decoration: none; /* Убирает подчеркивание при наведении */
+}
+
 /* Контейнер для кнопки корзины и авторизации */
 .header-actions {
     display: flex;

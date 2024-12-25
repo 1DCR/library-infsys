@@ -76,30 +76,7 @@ table, th, td {
     border: 1px solid #ddd;
 }
 
-tbody tr:last-child td {
+body tr:last-child td {
     border-bottom: none;
 }
 
-
-/* Добавление стилей для кнопки "Главное меню", если нужно */
-.main-menu-button {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-}
-
-.btn-back {
-    background-color: #007BFF;
-    color: white;
-    padding: 10px 15px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 14px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.btn-back:hover {
-    background-color: #0056b3;
-}

@@ -1,6 +1,18 @@
 from functools import wraps
 
-from flask import session, redirect, url_for, request, current_app
+from flask import session, redirect, url_for, request, current_app, jsonify
+
+
+def unauthorized_required(func):
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if not 'user_id' in session:
+            return func(*args, **kwargs)
+        else:
+            return redirect('/')
+    return wrapper
+
 
 def login_required(func):
 
@@ -9,7 +21,7 @@ def login_required(func):
         if 'user_id' in session:
             return func(*args, **kwargs)
         else:
-            return redirect(url_for('auth_bp.login_form'))
+            return jsonify({'error': 'Unauthorized'}), 401
     return wrapper
 
 def group_required(func):
@@ -29,3 +41,4 @@ def group_required(func):
         else:
             return 'Вам необходимо авторизоваться для работы с данным функционалом'
     return wrapper
+

@@ -5,18 +5,22 @@ from auth.route import blueprint_auth
 from query.route import blueprint_query
 from report.route import blueprint_report
 from catalog.route import blueprint_catalog
+from cart.route import blueprint_cart
 from access import login_required
 
 
 app = Flask(__name__)
 
-#app.debug = True
+app.debug = True
+app.config["EXPLAIN_TEMPLATE_LOADING"] = True
+
 app.secret_key = 'You will never guess'
 
 app.register_blueprint(blueprint_auth, url_prefix='/auth')
 app.register_blueprint(blueprint_query, url_prefix='/query')
 app.register_blueprint(blueprint_report, url_prefix='/report')
 app.register_blueprint(blueprint_catalog, url_prefix='/catalog')
+app.register_blueprint(blueprint_cart, url_prefix='/cart')
 
 with open('data/db_config.json') as f:
     app.config['db_config'] = json.load(f)

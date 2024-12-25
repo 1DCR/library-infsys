@@ -39,4 +39,6 @@ def check_user(db_config, provider, login_data):
     if 'name' in user_data[0]:
         session['user_name'] = user_data[0]['name']
 
+    session.permanent = True
+
     return AuthResponse(error_message=error_message, status=True)

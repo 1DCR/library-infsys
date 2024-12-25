@@ -3,6 +3,7 @@ from flask import render_template, Blueprint, current_app, request, redirect, fl
 
 from database.sql_provider import SQLProvider
 from auth.model import check_user
+from access import unauthorized_required
 
 blueprint_auth = Blueprint('auth_bp', __name__, template_folder='templates')
 
@@ -10,6 +11,7 @@ provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 
 
 @blueprint_auth.route('/', methods=['GET'])
+@unauthorized_required
 def login_form():
     return render_template('login.html')
 
