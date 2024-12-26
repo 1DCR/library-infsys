@@ -26,10 +26,10 @@ def report_create_index():
     report_create_result = report_create(current_app.config['db_config'], provider, user_input_data)
 
     if not report_create_result.status:
-        flash(report_create_result.message, 'success')  # TODO: исправить flash-категории
+        flash(report_create_result.message, 'danger')
         return redirect(url_for('report_bp.report_handle') + '/?action=' + user_input_data['report_name'])
 
-    flash(report_create_result.message, 'danger')
+    flash(report_create_result.message, 'success')
     return redirect(url_for('report_bp.report_handle') + '/?action=' + user_input_data['report_name'])
 
 

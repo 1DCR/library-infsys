@@ -4,9 +4,10 @@
     right: 30px; /* Отступ от правого края */
     z-index: 1000;
     max-width: 300px; /* Ширина сообщения (можно настроить) */
-    max-height: 60px;
-    background-color: #ffefc2; /* Светло-желтый фон для сообщения */
-    border: 1px solid #ffcc00;
+}
+
+.flash-message {
+    margin-bottom: 10px; /* Отступ между сообщениями */
     border-radius: 8px;
     padding: 10px 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -17,10 +18,26 @@
     transition: opacity 0.5s ease-out; /* Плавный переход */
 }
 
-.flash-message {
-    margin-bottom: 10px; /* Отступ между сообщениями */
-}
-
 .flash-message:last-child {
     margin-bottom: 0;
+}
+
+.flash-message.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.flash-message.danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.flash-message.info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.flash-message.warning {
+    background-color: #fff3cd;
+    color: #856404;
 }

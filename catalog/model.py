@@ -52,7 +52,7 @@ def add_to_cart(db_config, sql_provider, data):
     if 'cart' not in session:
         current_cart = {'books': {}, 'total_price': 0}
     else:
-        current_cart = session.get('cart', default={})
+        current_cart = session.get('cart', {})
 
     current_cart['books'][catalog_book_id] = {'title': catalog_book_info['title'],
                                               'author': catalog_book_info['author_name'],

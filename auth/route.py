@@ -13,7 +13,7 @@ provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 @blueprint_auth.route('/', methods=['GET'])
 @unauthorized_required
 def login_form():
-    return render_template('login.html')
+    return render_template('login_form.html')
 
 
 @blueprint_auth.route('/', methods=['POST'])

@@ -11,8 +11,8 @@ from access import login_required
 
 app = Flask(__name__)
 
-app.debug = True
-app.config["EXPLAIN_TEMPLATE_LOADING"] = True
+#app.debug = True
+#app.config["EXPLAIN_TEMPLATE_LOADING"] = True
 
 app.secret_key = 'You will never guess'
 
@@ -51,7 +51,7 @@ def main_menu():
 @login_required
 def logout_func():
     session.clear()
-    flash('Вы вышли из системы')
+    flash('Вы вышли из системы', 'warning')
     return redirect('/')
 
 

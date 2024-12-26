@@ -49,6 +49,7 @@ input[type="date"] {
     font-size: 14px;
 }
 
+
 .btn {
     background-color: #007BFF;
     color: white;
@@ -64,11 +65,10 @@ input[type="date"] {
     background-color: #0056b3;
 }
 
-/* Стили для выпадающего списка */
 select {
-    width: 100%;          /* Ширина по умолчанию на 100% от родительского элемента */
-    max-width: 400px;     /* Максимальная ширина для обеспечения нормального отображения */
-    height: 40px;         /* Фиксированная высота выпадающего списка */
+    width: 100%;
+    max-width: 400px;
+    height: 40px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -76,11 +76,11 @@ select {
     background-color: #fff;
     color: #333;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    text-overflow: ellipsis; /* Если слишком длинное значение, оно будет обрезаться */
+    text-overflow: ellipsis;
     overflow: hidden;
 }
 
-/* Стили при наведении и фокусе на выпадающий список */
+
 select:hover,
 select:focus {
     border-color: #007BFF;
@@ -104,14 +104,14 @@ input[type="text"] {
 
 
 .button-group {
-    display: flex; /* Устанавливаем flexbox */
-    justify-content: space-between; /* Распределяем кнопки по краям контейнера */
-    gap: 10px; /* Добавляем отступ между кнопками */
-    margin-top: 20px; /* Отступ сверху */
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
 }
 
 .button-group .btn {
-    width: 48%; /* Каждая кнопка занимает примерно половину доступного пространства */
+    width: 48%;
     padding: 10px 15px;
     font-size: 14px;
     background-color: #007BFF;
@@ -126,4 +126,3 @@ input[type="text"] {
 .button-group .btn:hover {
     background-color: #0056b3;
 }
-
