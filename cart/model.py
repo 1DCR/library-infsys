@@ -1,7 +1,9 @@
 from flask import session
 from dataclasses import dataclass
 
-from database.select import select_dict
+from pyexpat.errors import messages
+
+from database.select import select_dict, insert_order_transaction
 
 MAX_AMOUNT = 20
 
@@ -9,6 +11,11 @@ MAX_AMOUNT = 20
 class CartResponse:
     cart: dict
     cart_count: int
+    message: str
+    status: bool
+
+@dataclass
+class OrderResponse:
     message: str
     status: bool
 
@@ -69,9 +76,37 @@ def remove_book(action_info):
 
     return True
 
-def clear():
+
+def clear_cart():
     session['cart'] = {'books': {}, 'total_price': 0}
     return True
 
+
 def create_order(db_config, sql_provider):
-    pass
+    message = ''
+    current_cart_info = get_cart_from_session()
+    current_cart = current_cart_info.cart
+    cart_count = current_cart_info.cart_count
+
+    if not (uniq_books_count := len(current_cart['books'])):
+        message = 'Что-то не так. Невозможно оформить пустой заказ'
+        return OrderResponse(message=message, status=False)
+
+    order_data = {'user_id': session['user_id'],
+                  'user_name': session['user_name'],
+                  'order_total_cost': current_cart['total_price'],
+                  'order_book_count': cart_count}
+
+    books_list = []
+    for book in current_cart['books']:
+        temp = current_cart['books'][book].copy()
+        temp['book_id'] = book
+        books_list.append(temp)
+
+    _sql_entry = sql_provider.get('insert_order.sql', order_data)
+    _sql_content = sql_provider.gen_multi_insert_template('insert_order_content.sql', uniq_books_count, books_list)
+    order_id = insert_order_transaction(db_config, _sql_entry, _sql_content)
+
+    clear_cart()
+    message = f'Заказ №{order_id} успешно оформлен!'
+    return OrderResponse(message=message, status=True)

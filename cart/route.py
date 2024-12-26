@@ -3,7 +3,7 @@ from flask import render_template, Blueprint, current_app, request, flash, jsoni
 
 from access import login_required
 from database.sql_provider import SQLProvider
-from cart.model import get_cart_from_session, change_amount, remove_book, clear, create_order
+from cart.model import get_cart_from_session, change_amount, remove_book, clear_cart, create_order
 
 
 blueprint_cart = Blueprint('cart_bp', __name__, template_folder='templates')
@@ -40,12 +40,16 @@ def remove_handle():
 @blueprint_cart.route('/clear', methods=['POST'])
 @login_required
 def clear_handle():
-    clear()
+    clear_cart()
     return redirect('/cart')
 
 
 @blueprint_cart.route('/order', methods=['POST'])
 @login_required
 def order_handle():
-    create_order(current_app.config['db_config'], provider)
+    order_result = create_order(current_app.config['db_config'], provider)
+    if not order_result.status:
+        flash(order_result.message, 'danger')
+    else:
+        flash(order_result.message, 'success')
     return redirect('/cart')

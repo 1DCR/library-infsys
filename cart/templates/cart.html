@@ -52,7 +52,9 @@
             <div class="cart-summary">
                 <h5>Всего товаров: {{ cart_count }} шт</h5>
                 <h5>Общая стоимость: {{ total_price }} ₽</h5>
-                <a href="#" class="btn btn-primary w-100">Оформить заказ</a>
+                <form action="{{ url_for('cart_bp.order_handle') }}" method="POST" class="d-inline">
+                    <button type="submit" class="btn btn-primary w-100">Оформить заказ</button>
+                </form>
             </div>
         </div>
         {% else %}
