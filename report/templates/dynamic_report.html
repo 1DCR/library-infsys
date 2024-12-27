@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Результат запроса</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{url_for('static', filename='dynamic_query.css')}}" rel="stylesheet" type="text/css">
+    <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
 <body>
-    <!-- Кнопка "Главное меню" -->
-    <div class="main-menu-button">
-        <a href="{{ url_for('main_menu') }}" class="btn-back">Главное меню</a>
-    </div>
+    {% include 'base_header.html' %}
+
     <div class="header-container">
         <h1>{{ report_result_message }}</h1>
     </div>

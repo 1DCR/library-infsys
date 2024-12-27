@@ -36,6 +36,7 @@ def add_to_cart(db_config, sql_provider, data):
                                  XX : {'TITLE' : BOOK_TITLE, 'AUTHOR' : NAME, 'PH' : PH_NAME, 'PRICE' : XXX, 'AMOUNT' : XX},
                                   X : {                                 .      .      .                                   }
                                  },
+                        'BOOKS_COUNT' : XX,
                         'TOTAL_PRICE' : XXXXX}"""
     message = ''
     catalog_book_id = data.get('catalog_book_id')
@@ -50,9 +51,9 @@ def add_to_cart(db_config, sql_provider, data):
     catalog_book_info = catalog_book_info[0]
 
     if 'cart' not in session:
-        current_cart = {'books': {}, 'total_price': 0}
+        current_cart = {'books': {}, 'total_price': 0, 'books_count': 0}
     else:
-        current_cart = session.get('cart', {})
+        current_cart = session.get('cart')
 
     current_cart['books'][catalog_book_id] = {'title': catalog_book_info['title'],
                                               'author': catalog_book_info['author_name'],
@@ -60,6 +61,7 @@ def add_to_cart(db_config, sql_provider, data):
                                               'price': catalog_book_info['price'],
                                               'amount': 1}
     current_cart['total_price'] += catalog_book_info['price']
+    current_cart['books_count'] += 1
 
     session['cart'] = current_cart
 

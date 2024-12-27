@@ -10,7 +10,6 @@
     });
 </script>
 
-
 <header class="page-header">
     <div class="header-title">
         <a href="/" class="library-link">Библиотека</a>
@@ -30,10 +29,10 @@
         {% if 'user_id' in session %}
         <div class="dropdown">
             <button class="btn btn-auth dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                {{ session.user_group or session.user_name }}
+                {{ session.user_name or session.user_group}}
             </button>
             <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                <li><a class="dropdown-item" href="{{ url_for('logout_func') }}">Выход</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('logout_func') }}">Выйти</a></li>
             </ul>
         </div>
         {% else %}

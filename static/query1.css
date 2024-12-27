@@ -14,7 +14,7 @@ body {
     height: 100vh;
 }
 
-.container {
+.custom-container {
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -23,25 +23,25 @@ body {
     text-align: center;
 }
 
-h2 {
+.custom-container h2 {
     color: #333;
     margin-bottom: 20px;
     font-size: 18px;
     text-transform: uppercase;
 }
 
-.input-group {
+.custom-input-group {
     margin-bottom: 15px;
     text-align: left;
 }
 
-label {
+.custom-input-group label {
     display: block;
     margin-bottom: 5px;
     color: #555;
 }
 
-input[type="date"] {
+.custom-input-group input[type="date"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -49,8 +49,7 @@ input[type="date"] {
     font-size: 14px;
 }
 
-
-.btn {
+.custom-btn {
     background-color: #007BFF;
     color: white;
     padding: 10px;
@@ -61,11 +60,11 @@ input[type="date"] {
     width: 100%;
 }
 
-.btn:hover {
+.custom-btn:hover {
     background-color: #0056b3;
 }
 
-select {
+.custom-container select {
     width: 100%;
     max-width: 400px;
     height: 40px;
@@ -80,20 +79,19 @@ select {
     overflow: hidden;
 }
 
-
-select:hover,
-select:focus {
+.custom-container select:hover,
+.custom-container select:focus {
     border-color: #007BFF;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
     outline: none;
 }
 
-option {
+.custom-container option {
     padding: 10px;
     background-color: #fff;
 }
 
-input[type="text"] {
+.custom-input-group input[type="text"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -102,15 +100,14 @@ input[type="text"] {
     box-sizing: border-box;
 }
 
-
-.button-group {
+.custom-button-group {
     display: flex;
     justify-content: space-between;
     gap: 10px;
     margin-top: 20px;
 }
 
-.button-group .btn {
+.custom-button-group .custom-btn {
     width: 48%;
     padding: 10px 15px;
     font-size: 14px;
@@ -123,6 +120,6 @@ input[type="text"] {
     text-align: center;
 }
 
-.button-group .btn:hover {
+.custom-button-group .custom-btn:hover {
     background-color: #0056b3;
 }

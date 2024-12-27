@@ -1,7 +1,7 @@
 import os
-from flask import render_template, Blueprint, current_app, request, flash, jsonify, session, redirect
+from flask import render_template, Blueprint, current_app, request, flash, redirect
 
-from access import login_required
+from access import group_required
 from database.sql_provider import SQLProvider
 from cart.model import get_cart_from_session, change_amount, remove_book, clear_cart, create_order
 
@@ -12,44 +12,53 @@ provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 
 
 @blueprint_cart.route('/', methods=['GET'])
-@login_required
+@group_required()
 def cart_index():
     result = get_cart_from_session()
+
     return render_template('cart.html', books=result.cart.get('books', {}),
-                           total_price=result.cart.get('total_price', {}), cart_count=result.cart_count, message=result.message)
+                           total_price=result.cart.get('total_price', {}), cart_count=result.books_count, message=result.message)
 
 
 @blueprint_cart.route('/change', methods=['POST'])
-@login_required
+@group_required()
 def change_amount_handle():
     action_info = request.args.to_dict()
-    status, message = change_amount(current_app.config['db_config'], provider, action_info)
-    if not status:
-        flash(message, 'warning')
+    result = change_amount(current_app.config['db_config'], provider, action_info)
+
+    if not result.message == '':
+        flash(result.message, 'warning')
+
     return redirect('/cart')
 
 
 @blueprint_cart.route('/remove', methods=['POST'])
-@login_required
+@group_required()
 def remove_handle():
     action_info = request.args.to_dict()
-    remove_book(action_info)
+    result = remove_book(action_info)
+    flash(result.message, 'warning')
+
     return redirect('/cart')
 
 
 @blueprint_cart.route('/clear', methods=['POST'])
-@login_required
+@group_required()
 def clear_handle():
     clear_cart()
+    flash('Корзина очищена', 'warning')
+
     return redirect('/cart')
 
 
 @blueprint_cart.route('/order', methods=['POST'])
-@login_required
+@group_required()
 def order_handle():
     order_result = create_order(current_app.config['db_config'], provider)
+
     if not order_result.status:
         flash(order_result.message, 'danger')
     else:
         flash(order_result.message, 'success')
+
     return redirect('/cart')

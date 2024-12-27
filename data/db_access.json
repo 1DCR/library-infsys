@@ -1,1 +1,7 @@
-{"librarian" : ["auth_bp", "query_bp", "report_bp"], "head_librarian" : ["auth_bp", "report_bp"], "director" : ["auth_bp"]}
+{
+  "librarian" : ["query_bp"],
+  "head_librarian" : ["report_bp", "report_bp.report_create_index", "report_bp.report_view_index"],
+  "director" : ["report_bp", "report_bp.report_view_index"],
+  "reader" : ["catalog_bp", "cart_bp"],
+  "guest": ["catalog_bp.catalog_index"]
+}

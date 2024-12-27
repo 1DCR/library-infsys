@@ -12,15 +12,16 @@ provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 
 
 @blueprint_query.route('/', methods=['GET'])
-@group_required
+@group_required()
 def query_handle():
     action = request.args.get('action')
+
     return render_template('query_form.html', query_name=action,
                            query_info=current_app.config['query_config'][action])
 
 
 @blueprint_query.route('/view', methods=['POST'])
-@group_required
+@group_required()
 def query_view():
     user_input_data = request.form.to_dict()
     query_result = query_execute(current_app.config['db_config'], provider, user_input_data)

@@ -18,7 +18,6 @@
     "menu_text": "Показать все издательства в городе N",
     "input_text" : "Издательства, находящиеся в городе",
     "result_text" : "Все издательства в городе $city"
-
   },
 
   "publish_house_batch" : {
@@ -29,6 +28,23 @@
     "menu_text": "Показать все поставки издательства X",
     "input_text" : "Все поставки издательства",
     "result_text" : "Все поставки издательства $publish_house_name"
-
+  },
+  "user_orders" : {
+    "sql_name" : "user_orders.sql",
+    "params" : [
+      {"name": "user_id", "type": "text", "label": "ID читателя:"}
+    ],
+    "menu_text": "Показать все заказы читателя N",
+    "input_text" : "Все заказы читателя",
+    "result_text" : "Все заказы читателя с ID: $user_id"
+  },
+  "user_order_content" : {
+    "sql_name" : "user_order_content.sql",
+    "params" : [
+      {"name": "order_id", "type": "text", "label": "№ заказа:"}
+    ],
+    "menu_text": "Показать заказ под номером N",
+    "input_text" : "Содержание заказа",
+    "result_text" : "Содержание заказа с ID: $order_id"
   }
 }

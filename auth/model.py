@@ -34,10 +34,12 @@ def check_user(db_config, provider, login_data):
         return AuthResponse(error_message=error_message, status=False)
 
     session['user_id'] = user_data[0]['user_id']
-    if 'user_group' in user_data[0]:
-        session['user_group'] = user_data[0]['user_group']
-    if 'name' in user_data[0]:
+
+    if login_data['role'] == 'reader':
         session['user_name'] = user_data[0]['name']
+        session['user_group'] = login_data['role']
+    else:
+        session['user_group'] = user_data[0]['user_group']
 
     session.permanent = True
 

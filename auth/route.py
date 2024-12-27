@@ -17,6 +17,7 @@ def login_form():
 
 
 @blueprint_auth.route('/', methods=['POST'])
+@unauthorized_required
 def auth_index():
     login_data = request.form.to_dict()
     auth_result = check_user(current_app.config['db_config'], provider, login_data)

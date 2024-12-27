@@ -1,7 +1,7 @@
 import os
-from flask import render_template, Blueprint, current_app, request, flash, jsonify, session
+from flask import render_template, Blueprint, current_app, request, flash, redirect, session
 
-from access import login_required
+from access import group_required
 from database.sql_provider import SQLProvider
 from catalog.model import get_books, add_to_cart
 
@@ -23,13 +23,13 @@ def catalog_index():
 
 
 @blueprint_catalog.route('/', methods=['POST'])
-@login_required
-def add_to_cart_handler():
+@group_required()
+def add_to_cart_htmx_handle():
     data = request.form.to_dict()
     result = add_to_cart(current_app.config['db_config'], provider, data)
 
     if not result.status:
         flash(result.message, 'danger')
-        return jsonify(result), 400
+        return redirect('/catalog')
 
     return render_template('success_button.html', catalog_book_id=data.get('catalog_book_id'))

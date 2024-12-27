@@ -37,12 +37,13 @@ with open('data/report_config.json', encoding='utf-8') as f:
 
 @app.route('/')
 def main_menu():
-    is_authorized = 'user_id' in session
-    user = session.get('user_group') or session.get('user_name')
-
     if 'user_group' in session:
-        return render_template('internal_main_menu.html', user=user, is_authorized=is_authorized,
-                           queries=app.config['query_config'], reports=app.config['report_config'])
+        if not (session['user_group'] == 'reader' or session['user_group'] == 'guest'):
+            user = session.get('user_group')
+            return render_template('internal_main_menu.html', user=user,
+                               queries=app.config['query_config'], reports=app.config['report_config'])
+    else:
+        session['user_group'] = 'guest'
 
     return redirect('/catalog')
 
@@ -53,6 +54,16 @@ def logout_func():
     session.clear()
     flash('Вы вышли из системы', 'warning')
     return redirect('/')
+
+
+@app.errorhandler(403)
+def internal_error(e):
+    return render_template('no_permission.html')
+
+
+@app.errorhandler(404)
+def internal_error(e):
+    return render_template('404.html')
 
 
 if __name__ == '__main__':
