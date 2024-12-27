@@ -24,7 +24,7 @@ def cart_index():
 @group_required()
 def change_amount_handle():
     action_info = request.args.to_dict()
-    result = change_amount(current_app.config['db_config'], provider, action_info)
+    result = change_amount(current_app.config['db_config_user'], provider, action_info)
 
     if not result.message == '':
         flash(result.message, 'warning')
@@ -54,7 +54,7 @@ def clear_handle():
 @blueprint_cart.route('/order', methods=['POST'])
 @group_required()
 def order_handle():
-    order_result = create_order(current_app.config['db_config'], provider)
+    order_result = create_order(current_app.config['db_config_user'], provider)
 
     if not order_result.status:
         flash(order_result.message, 'danger')

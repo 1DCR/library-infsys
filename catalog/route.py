@@ -13,7 +13,7 @@ provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 
 @blueprint_catalog.route('/', methods=['GET'])
 def catalog_index():
-    query_result = get_books(current_app.config['db_config'], provider)
+    query_result = get_books(current_app.config['db_config_user'], provider)
     cart_books_ids = list(map(int, session.get('cart', {}).get('books', {}).keys()))
 
     return render_template('catalog.html',
@@ -26,7 +26,7 @@ def catalog_index():
 @group_required()
 def add_to_cart_htmx_handle():
     data = request.form.to_dict()
-    result = add_to_cart(current_app.config['db_config'], provider, data)
+    result = add_to_cart(current_app.config['db_config_user'], provider, data)
 
     if not result.status:
         flash(result.message, 'danger')

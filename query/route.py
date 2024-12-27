@@ -24,7 +24,7 @@ def query_handle():
 @group_required()
 def query_view():
     user_input_data = request.form.to_dict()
-    query_result = query_execute(current_app.config['db_config'], provider, user_input_data)
+    query_result = query_execute(current_app.config['db_config_user'], provider, user_input_data)
 
     if not query_result.status:
         flash(query_result.message, 'danger')

@@ -24,7 +24,7 @@ def report_handle():
 @group_required(specify_request=True)
 def report_create_index():
     user_input_data = request.form.to_dict()
-    report_create_result = report_create(current_app.config['db_config'], provider, user_input_data)
+    report_create_result = report_create(current_app.config['db_config_user'], provider, user_input_data)
 
     if not report_create_result.status:
         flash(report_create_result.message, 'danger')
@@ -38,7 +38,7 @@ def report_create_index():
 @group_required(specify_request=True)
 def report_view_index():
     user_input_data = request.form.to_dict()
-    report_get_result = report_get(current_app.config['db_config'], provider, user_input_data)
+    report_get_result = report_get(current_app.config['db_config_user'], provider, user_input_data)
 
     if not report_get_result.status:
         flash(report_get_result.message, 'danger')

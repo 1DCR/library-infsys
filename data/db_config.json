@@ -1,1 +1,37 @@
-{"host" :  "127.0.0.1", "user" :  "root", "password" : "2508", "database" :  "labn1"}
+{
+  "director": {
+    "host" :  "127.0.0.1",
+    "user" :  "director",
+    "password" : "director_password",
+    "database" :  "labn1"},
+
+  "head_librarian": {
+    "host" :  "127.0.0.1",
+    "user" :  "head_librarian",
+    "password" : "head_librarian_password",
+    "database" :  "labn1"},
+
+  "librarian": {
+    "host" :  "127.0.0.1",
+    "user" :  "librarian",
+    "password" : "librarian_password",
+    "database" :  "labn1"},
+
+  "reader": {
+    "host" :  "127.0.0.1",
+    "user" :  "external_user",
+    "password" : "external_user_password",
+    "database" :  "labn1"},
+
+  "guest": {
+    "host" :  "127.0.0.1",
+    "user" :  "guest",
+    "password" : "guest_password",
+    "database" :  "labn1"},
+
+  "auth": {
+    "host" :  "127.0.0.1",
+    "user" :  "auth",
+    "password" : "auth_password",
+    "database" :  "labn1"}
+}

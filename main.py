@@ -34,9 +34,11 @@ with open('data/query_config.json', encoding='utf-8') as f:
 with open('data/report_config.json', encoding='utf-8') as f:
     app.config['report_config'] = json.load(f)
 
+app.config['db_config_user'] = app.config['db_config']['guest']
 
 @app.route('/')
 def main_menu():
+
     if 'user_group' in session:
         if not (session['user_group'] == 'reader' or session['user_group'] == 'guest'):
             user = session.get('user_group')

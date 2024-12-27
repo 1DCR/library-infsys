@@ -1,4 +1,4 @@
-from flask import session
+from flask import session, current_app
 from re import match
 
 from dataclasses import dataclass
@@ -23,7 +23,7 @@ def check_user(db_config, provider, login_data):
     sql_name = 'external_user.sql' if login_data['role'] == 'reader' else 'internal_user.sql'
 
     _sql = provider.get(sql_name, login_data)
-    user_data = select_dict(db_config, _sql)
+    user_data = select_dict(db_config['auth'], _sql)
 
     if not len(user_data):
         error_message = 'Пользователя с таким логином не существует'
@@ -41,6 +41,7 @@ def check_user(db_config, provider, login_data):
     else:
         session['user_group'] = user_data[0]['user_group']
 
+    current_app.config['db_config_user'] = current_app.config['db_config'][session['user_group']]
     session.permanent = True
 
     return AuthResponse(error_message=error_message, status=True)
