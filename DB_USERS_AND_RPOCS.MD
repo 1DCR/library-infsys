@@ -47,7 +47,9 @@
     GRANT SELECT ON labn1.book TO 'guest'@'localhost';
     GRANT SELECT ON labn1.publish_house TO 'guest'@'localhost';
 
-ПРОЦЕДУРА 1:
+**ПРОЦЕДУРЫ**
+
+ПРОЦЕДУРА - ОТЧЕТ О ПОСТАВКАХ КНИГ:
 
     DELIMITER $$
     CREATE DEFINER=`root`@`localhost` PROCEDURE `GenerateBookShipmentsReport`(
@@ -87,7 +89,7 @@
     END$$
     DELIMITER ;
 
-ПРОЦЕДУРА 2:
+ПРОЦЕДУРА - ОТЧЕТ О ПОСТАВКАХ ПО ИЗДАТЕЛЬСТВАМ:
 
 	DELIMITER $$
 	CREATE DEFINER=`root`@`localhost` PROCEDURE `GenerateShipmentsReport`(
@@ -135,7 +137,7 @@
 	END$$
 	DELIMITER ;
 
-ПРОЦЕДУРА 3:
+ПРОЦЕДУРА ОБНОВЛЕНИЯ КАТАЛОГА:
 
 	DELIMITER $$
 	CREATE DEFINER=`root`@`localhost` PROCEDURE `updateLib`(input_date DATE)
