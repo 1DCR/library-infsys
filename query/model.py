@@ -18,6 +18,7 @@ def query_execute(db_config, sql_provider, user_input_data):
     query_name = user_input_data['query_name']
     query_info = current_app.config['query_config'][query_name]
     _sql = sql_provider.get(query_info['sql_name'], user_input_data)
+
     result, schema = select_list(db_config, _sql)
 
     if not len(result):

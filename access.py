@@ -42,7 +42,7 @@ def group_required(specify_request=False):
                 if user_role in access and action in access[user_role]:
                     return func(*args, **kwargs)
                 else:
-                    return render_template('no_permission.html'), 403
+                    return render_template('403.html'), 403
 
             else:
                 return 'Вам необходимо авторизоваться для работы с данным функционалом', 401

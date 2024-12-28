@@ -5,6 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
             flashMessages.style.transition = 'opacity 0.5s ease-out';
             flashMessages.style.opacity = '0';
             setTimeout(() => flashMessages.remove(), 500);
-        }, 2000);
+        }, 3000);
     }
 });

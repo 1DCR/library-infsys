@@ -38,7 +38,6 @@ app.config['db_config_user'] = app.config['db_config']['guest']
 
 @app.route('/')
 def main_menu():
-
     if 'user_group' in session:
         if not (session['user_group'] == 'reader' or session['user_group'] == 'guest'):
             user = session.get('user_group')
@@ -58,9 +57,9 @@ def logout_func():
     return redirect('/')
 
 
-@app.errorhandler(403)
-def internal_error(e):
-    return render_template('no_permission.html')
+# @app.errorhandler(403)
+# def internal_error(e):
+#     return render_template('403.html')
 
 
 @app.errorhandler(404)

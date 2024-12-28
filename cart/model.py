@@ -25,7 +25,6 @@ def get_cart_from_session():
 
     if not books_count:
         message = 'Ваша корзина пуста'
-        return CartResponse(cart=current_cart, books_count=books_count, message=message, status=False)
 
     return CartResponse(cart=current_cart, books_count=books_count, message=message, status=True)
 

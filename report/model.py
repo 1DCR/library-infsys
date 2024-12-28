@@ -50,12 +50,17 @@ def report_create(db_config, sql_provider, user_input_data):
         message = 'Ошибка на стороне базы данных. Попробуйте позже'
         return ReportCreateResponse(message=message, status=False)
 
-    message = f'Отчет за {user_input_data["month"]} меcяц {user_input_data["year"]} года успешно создан' #TODO: СДЕЛАТЬ TEMPALATE
+    message = f'Отчет за {user_input_data["month"]} меcяц {user_input_data["year"]} года успешно создан'
     return ReportCreateResponse(message=message, status=True)
 
 
 def report_get(db_config, sql_provider, user_input_data):
     message = ''
+
+    if not is_month_ended(int(user_input_data['year']), int(user_input_data['month'])):
+        message = 'Отчетов за еще не закончившийся период не может существовать'
+        return ReportGetResponse(result=(), schema=[], message=message, status=False)
+
     report_name = user_input_data['report_name']
     report_info = current_app.config['report_config'][report_name]
 
