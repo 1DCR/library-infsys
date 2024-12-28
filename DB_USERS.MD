@@ -89,51 +89,51 @@
 
 
 
-DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GenerateShipmentsReport`(
-    IN report_year INT,
-    IN report_month INT
-)
-BEGIN
-    DECLARE report_id INT;
-    DECLARE report_date DATE;
-
-    SET report_date = MAKEDATE(report_year, 1) + INTERVAL (report_month - 1) MONTH;
-    
-    INSERT INTO shipments_report (report_date)
-    VALUES (report_date);
-
-    SET report_id = LAST_INSERT_ID();
-    
-    INSERT INTO shipments_report_content (
-        publish_house_id, 
-        publish_house_name, 
-        publish_house_phoneNumber, 
-        total_amount, 
-        total_book_amount, 
-        total_book_price, 
-        shipments_report_id
-    )
-    SELECT
-        ph.idPublish_house AS publish_house_id,
-        ph.name AS publish_house_name,
-        ph.phoneNumber AS publish_house_phoneNumber,
-        COUNT(DISTINCT bs.idBook_set) AS total_amount,
-        SUM(bsl.amount) AS total_book_amount,
-        SUM(bsl.price * bsl.amount) AS total_book_price,
-        report_id
-    FROM 
-        book_set bs
-    JOIN 
-        book_set_list bsl ON bs.idBook_set = bsl.bookSet
-    JOIN 
-        publish_house ph ON bs.provider = ph.idPublish_house
-    WHERE 
-        MONTH(bs.bs_date) = report_month AND YEAR(bs.bs_date) = report_year
-    GROUP BY 
-        ph.idPublish_house, ph.name, ph.phoneNumber;
-END$$
-DELIMITER ;
+	DELIMITER $$
+	CREATE DEFINER=`root`@`localhost` PROCEDURE `GenerateShipmentsReport`(
+	    IN report_year INT,
+	    IN report_month INT
+	)
+	BEGIN
+	    DECLARE report_id INT;
+	    DECLARE report_date DATE;
+	
+	    SET report_date = MAKEDATE(report_year, 1) + INTERVAL (report_month - 1) MONTH;
+	    
+	    INSERT INTO shipments_report (report_date)
+	    VALUES (report_date);
+	
+	    SET report_id = LAST_INSERT_ID();
+	    
+	    INSERT INTO shipments_report_content (
+	        publish_house_id, 
+	        publish_house_name, 
+	        publish_house_phoneNumber, 
+	        total_amount, 
+	        total_book_amount, 
+	        total_book_price, 
+	        shipments_report_id
+	    )
+	    SELECT
+	        ph.idPublish_house AS publish_house_id,
+	        ph.name AS publish_house_name,
+	        ph.phoneNumber AS publish_house_phoneNumber,
+	        COUNT(DISTINCT bs.idBook_set) AS total_amount,
+	        SUM(bsl.amount) AS total_book_amount,
+	        SUM(bsl.price * bsl.amount) AS total_book_price,
+	        report_id
+	    FROM 
+	        book_set bs
+	    JOIN 
+	        book_set_list bsl ON bs.idBook_set = bsl.bookSet
+	    JOIN 
+	        publish_house ph ON bs.provider = ph.idPublish_house
+	    WHERE 
+	        MONTH(bs.bs_date) = report_month AND YEAR(bs.bs_date) = report_year
+	    GROUP BY 
+	        ph.idPublish_house, ph.name, ph.phoneNumber;
+	END$$
+	DELIMITER ;
 
 
 
