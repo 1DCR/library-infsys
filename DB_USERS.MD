@@ -47,7 +47,7 @@
     GRANT SELECT ON labn1.book TO 'guest'@'localhost';
     GRANT SELECT ON labn1.publish_house TO 'guest'@'localhost';
 
-
+ПРОЦЕДУРА 1:
 
     DELIMITER $$
     CREATE DEFINER=`root`@`localhost` PROCEDURE `GenerateBookShipmentsReport`(
@@ -87,7 +87,7 @@
     END$$
     DELIMITER ;
 
-
+ПРОЦЕДУРА 2:
 
 	DELIMITER $$
 	CREATE DEFINER=`root`@`localhost` PROCEDURE `GenerateShipmentsReport`(
@@ -135,29 +135,29 @@
 	END$$
 	DELIMITER ;
 
+ПРОЦЕДУРА 3:
 
-
-DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `updateLib`(input_date DATE)
-BEGIN
-	DECLARE b_id, b_count, b_price INTEGER;
-	DECLARE done integer DEFAULT 0;
-	DECLARE C1 CURSOR FOR 
-		SELECT bookId, amount, price FROM book_set_list bsl
-		JOIN book_set bs ON bs.idBook_set = bsl.bookSet
-		WHERE bs.bs_date=input_date;
-	DECLARE EXIT HANDLER FOR SQLSTATE '02000' SET done=1;
-	OPEN C1;
-    WHILE done = 0 DO
-        FETCH C1 INTO b_id, b_count, b_price;
-        IF EXISTS (SELECT 1 FROM library_catalog WHERE lBook = b_id AND price = b_price) THEN
-            UPDATE library_catalog SET amount = amount + b_count
-            WHERE lBook = b_id AND price = b_price;
-        ELSE
-            INSERT INTO library_catalog (lBook, price, amount) VALUES (b_id, b_price, b_count);
-        END IF;
-    END WHILE;
-
-END$$
-DELIMITER ;
+	DELIMITER $$
+	CREATE DEFINER=`root`@`localhost` PROCEDURE `updateLib`(input_date DATE)
+	BEGIN
+		DECLARE b_id, b_count, b_price INTEGER;
+		DECLARE done integer DEFAULT 0;
+		DECLARE C1 CURSOR FOR 
+			SELECT bookId, amount, price FROM book_set_list bsl
+			JOIN book_set bs ON bs.idBook_set = bsl.bookSet
+			WHERE bs.bs_date=input_date;
+		DECLARE EXIT HANDLER FOR SQLSTATE '02000' SET done=1;
+		OPEN C1;
+	    WHILE done = 0 DO
+	        FETCH C1 INTO b_id, b_count, b_price;
+	        IF EXISTS (SELECT 1 FROM library_catalog WHERE lBook = b_id AND price = b_price) THEN
+	            UPDATE library_catalog SET amount = amount + b_count
+	            WHERE lBook = b_id AND price = b_price;
+	        ELSE
+	            INSERT INTO library_catalog (lBook, price, amount) VALUES (b_id, b_price, b_count);
+	        END IF;
+	    END WHILE;
+	
+	END$$
+	DELIMITER ;
 
