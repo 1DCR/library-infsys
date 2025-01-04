@@ -6,7 +6,7 @@ from database.sql_provider import SQLProvider
 from cart.model import get_cart_from_session, change_amount, remove_book, clear_cart, create_order
 
 
-blueprint_cart = Blueprint('cart_bp', __name__, template_folder='templates')
+blueprint_cart = Blueprint('cart_bp', __name__, template_folder='templates', static_folder='static')
 
 provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 
@@ -16,8 +16,11 @@ provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 def cart_index():
     result = get_cart_from_session()
 
-    return render_template('cart.html', books=result.cart.get('books', {}),
-                           total_price=result.cart.get('total_price', {}), cart_count=result.books_count, message=result.message)
+    return render_template('cart.html',
+                           books=result.cart.get('books', {}),
+                           total_price=result.cart.get('total_price', {}),
+                           cart_count=result.books_count,
+                           message=result.message)
 
 
 @blueprint_cart.route('/change', methods=['POST'])

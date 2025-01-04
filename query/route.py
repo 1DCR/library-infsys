@@ -6,7 +6,7 @@ from access import group_required
 from query.model import query_execute
 
 
-blueprint_query = Blueprint('query_bp', __name__, template_folder ='templates')
+blueprint_query = Blueprint('query_bp', __name__, template_folder ='templates', static_folder='static')
 
 provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 

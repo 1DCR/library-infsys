@@ -42,6 +42,5 @@ def check_user(db_config, provider, login_data):
         session['user_group'] = user_data[0]['user_group']
 
     current_app.config['db_config_user'] = current_app.config['db_config'][session['user_group']]
-    session.permanent = True
 
     return AuthResponse(error_message=error_message, status=True)

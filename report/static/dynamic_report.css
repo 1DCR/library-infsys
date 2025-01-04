@@ -1,0 +1,82 @@
+/* Устанавливаем box-sizing для всех элементов */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #333;
+    flex-direction: column; /* Устанавливаем вертикальную ориентацию */
+}
+
+/* Контейнер для заголовка */
+.header-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;  /* Центрируем по горизонтали */
+    margin-bottom: 20px;      /* Отступ от заголовка до таблицы */
+}
+
+/* Заголовок */
+h1 {
+    color: #333;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/* Контейнер для таблицы */
+.table-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 80%;
+    overflow-x: auto;
+}
+
+
+/* Стили для таблицы */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 14px;
+}
+
+th {
+    background-color: #007BFF;
+    color: white;
+    font-weight: 600;
+}
+
+td {
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Изменения фона строки при наведении */
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Добавление границ и теней при наведении на таблицу */
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+body tr:last-child td {
+    border-bottom: none;
+}
+

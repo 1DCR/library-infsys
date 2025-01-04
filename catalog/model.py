@@ -64,5 +64,6 @@ def add_to_cart(db_config, sql_provider, data):
     current_cart['books_count'] += 1
 
     session['cart'] = current_cart
+    session.permanent = True
 
     return CartResponse(message=message, status=True)

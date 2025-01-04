@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, redirect, flash
+from flask import Flask, render_template, session, redirect, flash, url_for
 import json
 
 from auth.route import blueprint_auth
@@ -57,9 +57,9 @@ def logout_func():
     return redirect('/')
 
 
-# @app.errorhandler(403)
-# def internal_error(e):
-#     return render_template('403.html')
+@app.errorhandler(403)
+def internal_error(e):
+    return render_template('403.html')
 
 
 @app.errorhandler(404)

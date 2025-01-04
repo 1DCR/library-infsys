@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вход</title>
-    <link href="{{url_for('static', filename='auth.css')}}" rel="stylesheet" type="text/css">
-    <script src="{{url_for('static', filename='javascripts/toggle.js')}}"></script>
+    <link href="{{url_for('auth_bp.static', filename='login_form.css')}}" rel="stylesheet" type="text/css">
+    <script src="{{url_for('auth_bp.static', filename='login_form_toggle.js')}}"></script>
 </head>
 <body>
     {% include 'base_header.html' %}

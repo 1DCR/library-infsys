@@ -6,7 +6,7 @@ from database.sql_provider import SQLProvider
 from catalog.model import get_books, add_to_cart
 
 
-blueprint_catalog = Blueprint('catalog_bp', __name__, template_folder='templates')
+blueprint_catalog = Blueprint('catalog_bp', __name__, template_folder='templates', static_folder='static')
 
 provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 

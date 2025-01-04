@@ -5,7 +5,7 @@ from database.sql_provider import SQLProvider
 from auth.model import check_user
 from access import unauthorized_required
 
-blueprint_auth = Blueprint('auth_bp', __name__, template_folder='templates')
+blueprint_auth = Blueprint('auth_bp', __name__, template_folder='templates', static_folder='static')
 
 provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 
