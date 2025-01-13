@@ -1,20 +1,24 @@
 import os
-from flask import render_template, Blueprint, current_app, request, flash, redirect, url_for
 
-from database.sql_provider import SQLProvider
+from flask import render_template, Blueprint, current_app, request, flash, redirect, url_for, session
+
 from access import group_required
+from database.sql_provider import SQLProvider
 from query.model import query_execute
 
 
-blueprint_query = Blueprint('query_bp', __name__, template_folder ='templates', static_folder='static')
+blueprint_query = Blueprint('query_bp', __name__, template_folder='templates', static_folder='static')
 
 provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 
 
 @blueprint_query.route('/', methods=['GET'])
-@group_required()
+@group_required(specify_endpoint=False)
 def query_handle():
     action = request.args.get('action')
+
+    if not action:
+        return redirect('/')
 
     return render_template('query_form.html', query_name=action,
                            query_info=current_app.config['query_config'][action])
@@ -24,7 +28,8 @@ def query_handle():
 @group_required()
 def query_view():
     user_input_data = request.form.to_dict()
-    query_result = query_execute(current_app.config['db_config_user'], provider, user_input_data)
+    query_result = query_execute(current_app.config['db_config'][session.get('user_group', 'guest')], provider,
+                                 user_input_data)
 
     if not query_result.status:
         flash(query_result.message, 'danger')

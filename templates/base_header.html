@@ -15,17 +15,11 @@
         <a href="/" class="library-link">Библиотека</a>
     </div>
     <div class="header-actions">
-        <button class="btn btn-cart" id="cartButton" style="display: none;">
-            {% if 'user_id' in session %}
-                <a href="/cart">
-                    <img src="{{ url_for('static', filename='icons/bookshelf.ico') }}" alt="Корзина">
-                </a>
-            {% else %}
-                <a href="/auth">
-                    <img src="{{ url_for('static', filename='icons/bookshelf.ico') }}" alt="Корзина">
-                </a>
-            {% endif %}
-        </button>
+        <a href="/cart">
+            <button class="btn btn-cart" id="cartButton" style="display: none;">
+                <img src="{{ url_for('static', filename='icons/bookshelf.ico') }}" alt="Корзина">
+            </button>
+        </a>
         {% if 'user_id' in session %}
         <div class="dropdown">
             <button class="btn btn-auth dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -36,9 +30,9 @@
             </ul>
         </div>
         {% else %}
-        <button class="btn btn-auth" id="authButton">
-            <a href="{{ url_for('auth_bp.auth_index') }}">Войти</a>
-        </button>
+        <a href="{{ url_for('auth_bp.auth_index') }}">
+            <button class="btn btn-auth" id="authButton">Войти</button>
+        </a>
         {% endif %}
     </div>
 </header>

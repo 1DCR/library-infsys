@@ -30,6 +30,7 @@
     GRANT SELECT ON labn1.publish_house TO 'librarian'@'localhost';
     GRANT SELECT ON labn1.user_order TO 'librarian'@'localhost';
     GRANT SELECT ON labn1.user_order_content TO 'librarian'@'localhost';
+    GRANT SELECT ON labn1.library_catalog TO 'librarian'@'localhost';
     
 
     GRANT INSERT ON labn1.user_order TO 'external_user'@'localhost';

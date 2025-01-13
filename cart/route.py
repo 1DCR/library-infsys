@@ -1,10 +1,10 @@
 import os
-from flask import render_template, Blueprint, current_app, request, flash, redirect
+
+from flask import render_template, Blueprint, current_app, request, flash, redirect, session
 
 from access import group_required
-from database.sql_provider import SQLProvider
 from cart.model import get_cart_from_session, change_amount, remove_book, clear_cart, create_order
-
+from database.sql_provider import SQLProvider
 
 blueprint_cart = Blueprint('cart_bp', __name__, template_folder='templates', static_folder='static')
 
@@ -12,7 +12,7 @@ provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 
 
 @blueprint_cart.route('/', methods=['GET'])
-@group_required()
+@group_required(specify_endpoint=False)
 def cart_index():
     result = get_cart_from_session()
 
@@ -27,7 +27,7 @@ def cart_index():
 @group_required()
 def change_amount_handle():
     action_info = request.args.to_dict()
-    result = change_amount(current_app.config['db_config_user'], provider, action_info)
+    result = change_amount(current_app.config['db_config'][session.get('user_group', 'guest')], provider, action_info)
 
     if not result.message == '':
         flash(result.message, 'warning')
@@ -57,7 +57,7 @@ def clear_handle():
 @blueprint_cart.route('/order', methods=['POST'])
 @group_required()
 def order_handle():
-    order_result = create_order(current_app.config['db_config_user'], provider)
+    order_result = create_order(current_app.config['db_config'][session.get('user_group', 'guest')], provider)
 
     if not order_result.status:
         flash(order_result.message, 'danger')

@@ -1,7 +1,17 @@
 {
-  "librarian" : ["query_bp"],
-  "head_librarian" : ["report_bp", "report_bp.report_create_index", "report_bp.report_view_index"],
-  "director" : ["report_bp", "report_bp.report_view_index"],
-  "reader" : ["catalog_bp", "cart_bp"],
-  "guest": ["catalog_bp.catalog_index"]
+  "librarian" : {
+    "query_bp" : ["all"]},
+
+  "head_librarian" : {
+    "report_bp" : ["all"]},
+
+  "director" : {
+    "report_bp" : ["report_view_index"]},
+
+  "reader" : {
+    "catalog_bp" :  ["all"],
+    "cart_bp" :  ["all"]},
+
+  "guest": {
+    "catalog_bp" :  ["none"]}
 }

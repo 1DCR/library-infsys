@@ -20,7 +20,7 @@ def login_form():
 @unauthorized_required
 def auth_index():
     login_data = request.form.to_dict()
-    auth_result = check_user(current_app.config['db_config'], provider, login_data)
+    auth_result = check_user(current_app.config['db_config']['auth'], provider, login_data) #?guest
 
     if auth_result.status:
         flash('Вы успешно авторизовались!', 'success')

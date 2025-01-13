@@ -1,10 +1,10 @@
 import os
+
 from flask import render_template, Blueprint, current_app, request, flash, redirect, session
 
 from access import group_required
-from database.sql_provider import SQLProvider
 from catalog.model import get_books, add_to_cart
-
+from database.sql_provider import SQLProvider
 
 blueprint_catalog = Blueprint('catalog_bp', __name__, template_folder='templates', static_folder='static')
 
@@ -12,8 +12,9 @@ provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 
 
 @blueprint_catalog.route('/', methods=['GET'])
+@group_required(specify_endpoint=False)
 def catalog_index():
-    query_result = get_books(current_app.config['db_config_user'], provider)
+    query_result = get_books(current_app.config['db_config'][session.get('user_group', 'guest')], provider)
     cart_books_ids = list(map(int, session.get('cart', {}).get('books', {}).keys()))
 
     return render_template('catalog.html',
@@ -26,7 +27,7 @@ def catalog_index():
 @group_required()
 def add_to_cart_htmx_handle():
     data = request.form.to_dict()
-    result = add_to_cart(current_app.config['db_config_user'], provider, data)
+    result = add_to_cart(current_app.config['db_config'][session.get('user_group', 'guest')], provider, data)
 
     if not result.status:
         flash(result.message, 'danger')

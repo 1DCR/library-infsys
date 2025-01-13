@@ -1,20 +1,21 @@
-from flask import Flask, render_template, session, redirect, flash, url_for
 import json
 
+from flask import Flask, render_template, session, redirect, flash
+
+from access import login_required
 from auth.route import blueprint_auth
+from cart.route import blueprint_cart
+from catalog.route import blueprint_catalog
 from query.route import blueprint_query
 from report.route import blueprint_report
-from catalog.route import blueprint_catalog
-from cart.route import blueprint_cart
-from access import login_required
 
 
 app = Flask(__name__)
 
-#app.debug = True
-#app.config["EXPLAIN_TEMPLATE_LOADING"] = True
+# app.debug = True
+# app.config["EXPLAIN_TEMPLATE_LOADING"] = True
 
-app.secret_key = 'You will never guess'
+app.secret_key = 'Estimated time to guess is 283 million trillion trillion years'
 
 app.register_blueprint(blueprint_auth, url_prefix='/auth')
 app.register_blueprint(blueprint_query, url_prefix='/query')
@@ -34,19 +35,18 @@ with open('data/query_config.json', encoding='utf-8') as f:
 with open('data/report_config.json', encoding='utf-8') as f:
     app.config['report_config'] = json.load(f)
 
-app.config['db_config_user'] = app.config['db_config']['guest']
 
 @app.route('/')
 def main_menu():
-    if 'user_group' in session:
-        if not (session['user_group'] == 'reader' or session['user_group'] == 'guest'):
-            user = session.get('user_group')
-            return render_template('internal_main_menu.html', user=user,
-                               queries=app.config['query_config'], reports=app.config['report_config'])
-    else:
-        session['user_group'] = 'guest'
+    user_group = session.get('user_group', 'guest')
 
-    return redirect('/catalog')
+    if user_group == 'guest' or user_group == 'reader':
+        return redirect('/catalog')
+
+    return render_template('internal_main_menu.html',
+                           user=user_group,
+                           queries=app.config['query_config'],
+                           reports=app.config['report_config'])
 
 
 @app.route('/logout')
@@ -57,14 +57,19 @@ def logout_func():
     return redirect('/')
 
 
+@app.errorhandler(401)
+def internal_error(e):
+    return render_template('401.html'), 401
+
+
 @app.errorhandler(403)
 def internal_error(e):
-    return render_template('403.html')
+    return render_template('403.html'), 403
 
 
 @app.errorhandler(404)
 def internal_error(e):
-    return render_template('404.html')
+    return render_template('404.html'), 404
 
 
 if __name__ == '__main__':

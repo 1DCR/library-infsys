@@ -1,7 +1,8 @@
+from dataclasses import dataclass
+
 from flask import session
 
 from database.select import select_dict
-from dataclasses import dataclass
 
 
 @dataclass
@@ -32,12 +33,12 @@ def get_books(db_config, sql_provider):
 
 def add_to_cart(db_config, sql_provider, data):
     """SESSION['cart'] = {'BOOKS' :
-                                    {XX : {'TITLE' : BOOK_TITLE, 'AUTHOR' : NAME, 'PH' : PH_NAME, 'PRICE' : XXX, 'AMOUNT' : XX},
-                                     XX : {'TITLE' : BOOK_TITLE, 'AUTHOR' : NAME, 'PH' : PH_NAME, 'PRICE' : XXX, 'AMOUNT' : XX},
-                                      X : {                                 .      .      .                                   }
-                                     },
-                            'BOOKS_COUNT' : XX,
-                            'TOTAL_PRICE' : XXXXX}"""
+                                {XX : {'TITLE' : BOOK_TITLE, 'AUTHOR' : NAME, 'PH' : PH_NAME, 'PRICE' : XXX, 'AMOUNT' : XX},
+                                 XX : {'TITLE' : BOOK_TITLE, 'AUTHOR' : NAME, 'PH' : PH_NAME, 'PRICE' : XXX, 'AMOUNT' : XX},
+                                 X : {                                 .      .      .                                   }
+                                 },
+                        'BOOKS_COUNT' : XX,
+                        'TOTAL_PRICE' : XXXXX}"""
 
     message = ''
     catalog_book_id = data.get('catalog_book_id')

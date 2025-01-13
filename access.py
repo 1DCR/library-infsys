@@ -1,51 +1,54 @@
 from functools import wraps
 
-from flask import session, redirect, request, current_app, jsonify, render_template
+from flask import session, redirect, request, current_app
+from werkzeug.exceptions import Unauthorized, Forbidden
 
 
 def unauthorized_required(func):
-
     @wraps(func)
     def wrapper(*args, **kwargs):
         if not 'user_id' in session:
             return func(*args, **kwargs)
         else:
-            return redirect('/catalog')
+            return redirect('/')
+
     return wrapper
 
 
 def login_required(func):
-
     @wraps(func)
     def wrapper(*args, **kwargs):
         if 'user_id' in session:
             return func(*args, **kwargs)
         else:
-            return 'Вам необходимо авторизоваться для работы с данным функционалом', 401
+            raise Unauthorized
+
     return wrapper
 
 
-def group_required(specify_request=False):
-
+def group_required(specify_endpoint=True):
     def wrapper(func):
 
         @wraps(func)
         def decorator(*args, **kwargs):
-            if 'user_group' in session:
-                user_role = session.get('user_group')
-                access = current_app.config['db_access']
+            full_endpoint = request.endpoint
+            bp, action = full_endpoint.split('.')
 
-                action = request.endpoint
-                if not specify_request:
-                    action = action.split('.')[0]
+            user_role = session.get('user_group', 'guest')
+            access = current_app.config['db_access'][user_role]
 
-                if user_role in access and action in access[user_role]:
+            if not specify_endpoint:
+                if bp in access:
                     return func(*args, **kwargs)
-                else:
-                    return render_template('403.html'), 403
-
             else:
-                return 'Вам необходимо авторизоваться для работы с данным функционалом', 401
+                access_list = access.get(bp, [])
+                if 'all' in access_list or action in access_list:
+                    return func(*args, **kwargs)
+
+            if user_role == 'guest':
+                raise Unauthorized
+            else:
+                raise Forbidden
 
         return decorator
 

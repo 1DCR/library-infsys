@@ -1,8 +1,9 @@
-from flask import current_app
+from dataclasses import dataclass
 from string import Template
 
+from flask import current_app
+
 from database.select import select_list
-from dataclasses import dataclass
 
 
 @dataclass
